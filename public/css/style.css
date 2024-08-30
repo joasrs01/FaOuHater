@@ -1,0 +1,109 @@
+* {
+    font-family: Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  #navbar {
+    padding: 1em 2em;
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #521d5e;
+    color: #fff;
+  }
+  
+  #navbar ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  #navbar ul li {
+    margin-left: 1em;
+  }
+  
+  #navbar ul li a, #nav-titulo {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .container {
+    max-width: 650px;
+    margin: 2em auto;
+  }
+
+  .container form {
+    margin-top: 1.5em;
+  } 
+
+  .form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+  }
+  
+  .form-control label {
+    font-weight: bold;
+    margin-bottom: 0.3em;
+  }
+  
+  .form-control input,
+  .form-control textarea {
+    padding: 7px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  form input[type='submit'] {
+    background-color: #521d5e;
+    color: #fff;
+    padding: 0.7em 1.5em;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .card-review {
+    width: 100%;
+    border: 1px solid #8200a0;
+    border-radius: 5px;
+    margin-bottom: 3px;
+  }
+
+  .titulo-artista{
+    margin-bottom: 10px;
+    color: gray;
+  }
+
+  .titulo-musica{
+    color: #521d5e;
+  }
+
+  .card-content {
+    padding: 25px;
+  }
+
+  .t-musica-artista {
+    width: 50%;
+  }
+
+  .titulo {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .span-data-review{
+    font-size: smaller;
+    color: grey;
+  }
+
+  h1 {
+    color: #521d5e;
+  }

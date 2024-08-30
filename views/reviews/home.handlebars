@@ -1,0 +1,19 @@
+<h1>Reviews Recentes</h1>
+<div class="reviews">
+    {{#each reviews}}
+        <div class="card-review">
+            <div class="card-content">
+                <div class="titulo">
+                    <div class="t-musica-artista">
+                        <h2 class="titulo-musica">{{this.musica}}</h2>
+                        <h4 class="titulo-artista">{{this.artista}}</h4>
+                    </div>
+                    <span class="span-data-review">{{this.modDataAtualizacao}}</span>
+                </div>
+                <span class="span-review">
+                    {{this.review}}
+                </span>
+            </div>
+        </div>
+    {{/each}}
+</div>
