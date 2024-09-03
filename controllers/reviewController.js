@@ -25,6 +25,24 @@ module.exports = class ReviewController {
       ],
       attributes: {
         include: [
+          [
+            Sequelize.literal(`(
+              SELECT "R"."like"
+              FROM "Reacoes" AS "R"
+              WHERE "R"."UsuarioId" = ${req.usuario ? req.usuario.userId : 0}
+              AND "R"."ReviewId" = "Review"."id"
+            )`),
+            "usuarioLike",
+          ],
+          [
+            Sequelize.literal(`(
+              SELECT "R"."dislike"
+              FROM "Reacoes" AS "R"
+              WHERE "R"."UsuarioId" = ${req.usuario ? req.usuario.userId : 0}
+              AND "R"."ReviewId" = "Review"."id"
+            )`),
+            "usuarioDislike",
+          ],
           // Contagem de likes
           [
             Sequelize.fn(

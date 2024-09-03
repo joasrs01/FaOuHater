@@ -21,13 +21,34 @@ btnsLike.forEach((btn) => {
       });
 
       if (resposta.ok) {
-        let qtdAtualizada = await resposta.json();
+        let resultado = await resposta.json();
 
-        let qtdLike = document.getElementById(`qtd-like-${idReview}`);
-        let qtdDislike = document.getElementById(`qtd-dislike-${idReview}`);
+        let qtdLike = document.querySelector(`#qtd-like-${idReview}`);
+        let qtdDislike = document.querySelector(`#qtd-dislike-${idReview}`);
 
-        qtdLike.innerHTML = qtdAtualizada.qtds.qtdLikes;
-        qtdDislike.innerHTML = qtdAtualizada.qtds.qtdDislikes;
+        let iconLike = document.querySelector(`#lr-${idReview}u-${idUsuario}`);
+        let iconDisLike = document.querySelector(
+          `#dr-${idReview}u-${idUsuario}`
+        );
+
+        if (resultado.jsnRetorno.like) {
+          iconLike.classList.remove("bi-hand-thumbs-up");
+          iconLike.classList.add("bi-hand-thumbs-up-fill");
+        } else {
+          iconLike.classList.remove("bi-hand-thumbs-up-fill");
+          iconLike.classList.add("bi-hand-thumbs-up");
+        }
+
+        if (resultado.jsnRetorno.dislike) {
+          iconDisLike.classList.remove("bi-hand-thumbs-down");
+          iconDisLike.classList.add("bi-hand-thumbs-down-fill");
+        } else {
+          iconDisLike.classList.remove("bi-hand-thumbs-down-fill");
+          iconDisLike.classList.add("bi-hand-thumbs-down");
+        }
+
+        qtdLike.innerHTML = resultado.jsnRetorno.qtds.qtdLikes;
+        qtdDislike.innerHTML = resultado.jsnRetorno.qtds.qtdDislikes;
       }
     } catch (error) {
       console.log(`erro ao ${!bLike ? "des" : ""}curtir a review: ` + error);

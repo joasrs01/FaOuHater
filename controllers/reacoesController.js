@@ -18,7 +18,12 @@ module.exports = class reacoesController {
 
         await reacao.save();
       } else {
-        await Reacoes.create({ like, dislike: !like, UsuarioId, ReviewId });
+        reacao = await Reacoes.create({
+          like,
+          dislike: !like,
+          UsuarioId,
+          ReviewId,
+        });
       }
 
       let qtds = await Reacoes.findOne({
@@ -46,9 +51,15 @@ module.exports = class reacoesController {
         group: ["ReviewId"], // Agrupa pelo código da review
       });
 
-      console.log(qtds);
+      let jsnRetorno = {
+        qtds: qtds,
+        like: reacao.like,
+        dislike: reacao.dislike,
+      };
 
-      res.json({ qtds });
+      console.log(jsnRetorno);
+
+      res.json({ jsnRetorno });
     } catch (error) {
       console.log(`erro ao ${!like ? "des" : ""}curtir a review: ` + error);
       res.status(500).send(`erro ao ${!like ? "des" : ""}curtir a review: `);

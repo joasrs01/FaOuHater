@@ -22,7 +22,7 @@
                 <div class="footer-review">
 
                     {{#if ../usuarioAutenticado}}
-                        <button class="btn-like btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like="1"><i class="bi bi-hand-thumbs-up fs-5"></i></button>
+                        <button class="btn-like btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like="1"><i id="lr-{{this.id}}u-{{../usuarioAutenticado.userId}}" {{#if this.usuarioLike}} class="bi bi-hand-thumbs-up-fill fs-5" {{else}} class="bi bi-hand-thumbs-up fs-5" {{/if}}></i></button>
                     {{else}}
                         <button disabled="true" class="btn-like btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-up fs-5"></i></button>
                     {{/if}}
@@ -30,7 +30,7 @@
                     <span id="qtd-like-{{this.id}}" class="span-reacao">{{this.qtdLikes}}</span>
 
                     {{#if ../usuarioAutenticado}}
-                        <button class="btn-dislike btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like=""><i class="bi bi-hand-thumbs-down fs-5"></i></button>
+                        <button class="btn-dislike btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like=""><i id="dr-{{this.id}}u-{{../usuarioAutenticado.userId}}" {{#if this.usuarioDislike}} class="bi bi-hand-thumbs-down-fill fs-5" {{else}} class="bi bi-hand-thumbs-down fs-5" {{/if}}></i></button>
                     {{else}}
                         <button disabled="true" class="btn-dislike btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-down fs-5"></i></button>
                     {{/if}}
