@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const conexao = require("../DB/conn");
+const Usuario = require("./usuarioModel");
 
 const Review = conexao.define("Review", {
   artista: {
@@ -14,7 +15,18 @@ const Review = conexao.define("Review", {
     type: DataTypes.TEXT,
     allowNull: false,
   },
+  like: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  dislike: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
 });
+
+Usuario.hasMany(Review);
+Review.belongsTo(Usuario);
 
 Review.sync()
   //.sync({ force: true })

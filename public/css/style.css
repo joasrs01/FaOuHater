@@ -1,109 +1,235 @@
 * {
-    font-family: Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 1em;
-  }
+  font-family: Helvetica, sans-serif;
+  color: #cccccc;
+  margin: 0;
+  padding: 0;
+}
 
-  #navbar {
-    padding: 1em 2em;
-    margin-bottom: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #521d5e;
-    color: #fff;
-  }
-  
-  #navbar ul {
-    display: flex;
-    list-style: none;
-  }
-  
-  #navbar ul li {
-    margin-left: 1em;
-  }
-  
-  #navbar ul li a, #nav-titulo {
-    text-decoration: none;
-    color: #fff;
-  }
-  
-  .container {
-    max-width: 650px;
-    margin: 2em auto;
-  }
+h1 {
+  text-align: center;
+  margin-bottom: 1em;
+  color: #BEBEBE;
+}
 
-  .container form {
-    margin-top: 1.5em;
-  } 
+#navbar {
+  padding: 1em 2em;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1C2840;
+  color: #BEBEBE;
+}
 
-  .form-control {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-  }
-  
-  .form-control label {
-    font-weight: bold;
-    margin-bottom: 0.3em;
-  }
-  
-  .form-control input,
-  .form-control textarea {
-    padding: 7px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-  }
-  
-  form input[type='submit'] {
-    background-color: #521d5e;
-    color: #fff;
-    padding: 0.7em 1.5em;
-    font-weight: bold;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
+#navbar ul {
+  display: flex;
+  list-style: none;
+}
 
-  .card-review {
+#navbar ul li {
+  margin-left: 5px;
+}
+
+#navbar ul li a, #nav-titulo {
+  text-decoration: none;
+  color: #BEBEBE;
+}
+
+.container {
+  max-width: 1100px !important;
+  margin: 2em auto;
+}
+
+.container form {
+  margin-top: 1.5em;
+  padding: 20px;
+} 
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.form-control label {
+  font-weight: bold;
+  margin-bottom: 0.3em;
+}
+
+.form-control input,
+.form-control textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 3px solid #1C2840;
+  color: #10151E;
+  background-color: #ccc;
+  font-size: medium;
+  margin-top: 5px;
+}
+
+#txt-area-review {
+  resize: none;
+  height: 250px;
+}
+
+form input[type='submit'] {
+  background-color: #3B568B;
+  color: #fff;
+  padding: 0.7em 1.5em;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.card-review {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.footer-review {
+  margin-top: 25px;
+  font-size: smaller;
+}
+
+.titulo-artista{
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.titulo-musica{
+  color: #3B568B;
+  margin-bottom: 0;
+}
+
+.card-content {
+  padding: 25px 25px 10px 25px;
+}
+
+.t-musica-artista {
+  width: 50%;
+}
+
+.titulo {
+  display: block;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.span-data-review{
+  font-size: smaller;
+  /* color: #BEBEBE; */
+  color: grey;
+}
+
+.card-login {
+  /* max-width: 350px; */
+  width: 50%;
+}
+
+#form-login {
+    padding: 20px;
+}
+
+.txt-login {
+    /* width: 100%; */
+    height: 28px;
+    background-color: #ccc;
+    color:#10151E;
+    font-size: medium;
+}
+
+.btn-login {
     width: 100%;
-    border: 1px solid #8200a0;
-    border-radius: 5px;
-    margin-bottom: 3px;
-  }
-
-  .titulo-artista{
+    height: 40px;
+    font-size: medium;
     margin-bottom: 10px;
-    color: gray;
+}
+
+.btn:hover {
+    background-color: #1C2840;
   }
 
-  .titulo-musica{
-    color: #521d5e;
-  }
+#link-nova-conta{
+  font-size: small;
+  width: 100%;
+  text-align: center;
+}
 
-  .card-content {
-    padding: 25px;
-  }
+.container-login {
+  display: flex;
+  justify-content: center;
+}
 
-  .t-musica-artista {
-    width: 50%;
-  }
+.card-padrao {
+  border: 1px solid #10151E;
+  background-color: #1C2840;
+  border-radius: 5px;
+}
 
-  .titulo {
-    display: flex;
-    justify-content: space-between;
-  }
+.info-review {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
 
-  .span-data-review{
-    font-size: smaller;
-    color: grey;
-  }
+.btn-like-dlike {
+  background: transparent;
+  border: none;
+  color: #BEBEBE;
+  padding: 5px;
+  border-radius: 5px;
+}
 
-  h1 {
-    color: #521d5e;
-  }
+/* .btn-like-dlike:hover {
+  background-color: #374F80;
+} */
+
+/* .btn-like:hover i {
+  background-color: white;
+}
+
+.btn-dislike:hover i {
+  background-color: white;
+} */
+
+.span-reacao {
+  margin-right: 10px;
+}
+
+.btn-reacao {
+  background-color: transparent;
+  border: none;
+}
+
+.desabilitado {
+  color: #ffffff30
+}
+
+/* -------------------- bootstrap */
+
+.form-control-bsp {
+  margin-bottom: 10px;
+}
+
+.txt-padrao-bsp {
+  margin: 0;
+  font-family: inherit;
+  line-height: inherit;
+  width: 100%;
+  padding: 8px;
+  font-size: medium;
+  color: #10151E;
+}
+
+#nav-cont-direita {
+  display: ruby;
+}
+
+#msg-login-invalido {
+  text-align: center;
+  background-color: #ff6464;
+  padding: 2px;
+  border-radius: 5px; 
+  border: 3px solid #912626;
+}

@@ -1,0 +1,21 @@
+<h1>Acesse sua conta!</h1>
+<div class="container container-login">
+        <div class="card-login card-padrao">
+            <form id="form-login" action="/usuario/login" method="POST">
+                <div class="form-control-bsp">
+                  {{!-- <label for="login">Acesse sua conta!</label> --}}
+                  <input class="txt-padrao-bsp" type="text" name="login" placeholder="Usuário">
+                </div>
+                <div class="form-control-bsp">
+                    <input class="txt-padrao-bsp" type="password" name="senha" placeholder="Senha">
+                  </div>
+                <input class="btn-login btn" type="submit" value="Login">
+                <div id="msg-login-invalido" {{#if esconderMsgInvalido}} hidden="true" {{/if}}>
+                  <span style="color:#b62222;">Login ou senha incorretos!</span>
+                </div>
+                <div id="link-nova-conta">
+                    <a href="/usuario/add">ou crie uma conta clicado aqui!</a>
+                </div>
+              </form>
+        </div>
+    </div>

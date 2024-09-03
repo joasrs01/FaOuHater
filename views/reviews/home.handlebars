@@ -1,18 +1,42 @@
 <h1>Reviews Recentes</h1>
 <div class="reviews">
     {{#each reviews}}
-        <div class="card-review">
+        <div class="card-review card-padrao">
             <div class="card-content">
                 <div class="titulo">
+                    <input type="hidden" name="idReview" value={{this.id}}>
+                    <div class="info-review">
+                        <span class="span-data-review">Por {{this.nomeUsuario}}</span>
+                        <span class="span-data-review">{{this.modDataAtualizacao}}</span>
+                    </div>
                     <div class="t-musica-artista">
                         <h2 class="titulo-musica">{{this.musica}}</h2>
                         <h4 class="titulo-artista">{{this.artista}}</h4>
                     </div>
-                    <span class="span-data-review">{{this.modDataAtualizacao}}</span>
                 </div>
-                <span class="span-review">
-                    {{this.review}}
-                </span>
+                <div class="conteudo-review">
+                    <span class="span-review">
+                        {{this.review}}
+                    </span>
+                </div>
+                <div class="footer-review">
+
+                    {{#if ../usuarioAutenticado}}
+                        <button class="btn-like btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like="1"><i class="bi bi-hand-thumbs-up fs-5"></i></button>
+                    {{else}}
+                        <button disabled="true" class="btn-like btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-up fs-5"></i></button>
+                    {{/if}}
+
+                    <span id="qtd-like-{{this.id}}" class="span-reacao">{{this.qtdLikes}}</span>
+
+                    {{#if ../usuarioAutenticado}}
+                        <button class="btn-dislike btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like=""><i class="bi bi-hand-thumbs-down fs-5"></i></button>
+                    {{else}}
+                        <button disabled="true" class="btn-dislike btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-down fs-5"></i></button>
+                    {{/if}}
+
+                    <span id="qtd-dislike-{{this.id}}">{{this.qtdDislikes}}</span>                       
+                </div>
             </div>
         </div>
     {{/each}}

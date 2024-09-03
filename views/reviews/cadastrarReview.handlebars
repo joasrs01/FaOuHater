@@ -1,17 +1,20 @@
 <h1>Cadastro de Review</h1>
 
-<form action="/reviews/add" method="post">
-    <div class="form-control">
-        <span for="artista">Artista:</span>
-        <input type="text" name="artista" placeholder="Nome da banda ou artista...">
-    </div>
-        <div class="form-control">
-        <span for="musica">Música:</span>
-        <input type="text" name="musica" placeholder="Nome da música...">
-    </div>
-        <div class="form-control">
-        <span for="titulo">Review:</span>
-        <textarea type="text" name="review" placeholder="Escreva aqui o seu review sobre a música"></textarea>
-    </div>
-    <input type="submit" value="Cadastrar">
-</form>
+<div class="card-padrao">
+    <form action="/reviews/add" method="post">
+        <input type="hidden" name="usuario" value={{usuarioAutenticado.userId}}>
+        <div class="form-control-bsp">
+            <span for="musica">Música:</span>
+            <input class="txt-padrao-bsp" type="text" name="musica" placeholder="Nome da música...">
+        </div>
+        <div class="form-control-bsp">
+            <span for="artista">Artista:</span>
+            <input class="txt-padrao-bsp" type="text" name="artista" placeholder="Nome da banda ou artista...">
+        </div>
+        <div class="form-control-bsp">
+            <span for="titulo">Review:</span>
+            <textarea class="txt-padrao-bsp" id="txt-area-review" type="text" name="review" placeholder="Escreva aqui o seu review sobre a música"></textarea>
+        </div>
+        <input class="btn" type="submit" value="Cadastrar">
+    </form>
+</div>

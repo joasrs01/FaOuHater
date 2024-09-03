@@ -1,0 +1,64 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnpm-debug.log*
+
+# Diretórios de log
+logs
+*.log
+logs/*
+
+# Diretórios de ambiente
+.env
+.env.local
+.env.*.local
+
+# Configurações de editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Diretórios temporários
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Build e Output
+dist/
+build/
+coverage/
+*.tgz
+*.zip
+*.tar
+*.out
+*.map
+
+# Arquivos de cache
+.cache/
+.cache-loader/
+.pnp
+.pnp.js
+.parcel-cache/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Testes
+coverage/
+junit.xml
+test-results/
+
+# Configurações e backups locais
+*.local
+*.bak
+*.backup
+*.swp
+*.swo
+*~
+.project
