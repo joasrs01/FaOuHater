@@ -1,7 +1,9 @@
 const { Sequelize } = require("sequelize");
-const conexao = new Sequelize("DB_Node", "postgres", "joaS12012022", {
-  host: "localhost",
+const conexao = new Sequelize(process.env.DATABASE_URL, {
+  // host: "localhost",
   dialect: "postgres",
+  protocol: "postgres",
+  logging: false,
 });
 
 try {

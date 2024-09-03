@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbr = require("express-handlebars");
+const porta = process.env.PORT || 3000;
 const app = express();
 const reviewsRouters = require("./routers/reviewsRouters");
 const usuariosRouters = require("./routers/usuariosRouters");
@@ -33,6 +34,6 @@ app.use((req, res) => {
 });
 
 // inicia o servidor
-app.listen(3000, () => {
-  console.log("servidor rodando na porta 3000.");
+app.listen(porta, () => {
+  console.log("servidor rodando na porta: " + porta);
 });
