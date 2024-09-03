@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+body {
+  background-color: #10151E !important;
+}
+
 h1 {
   text-align: center;
   margin-bottom: 1em;
@@ -147,7 +151,8 @@ form input[type='submit'] {
 }
 
 .btn:hover {
-    background-color: #1C2840;
+    background-color: #3B568B8A !important;
+    position: none;
   }
 
 #link-nova-conta{
@@ -163,7 +168,7 @@ form input[type='submit'] {
 
 .card-padrao {
   border: 1px solid #10151E;
-  background-color: #1C2840;
+  background-color: #f1f1f1;
   border-radius: 5px;
 }
 
@@ -195,6 +200,11 @@ form input[type='submit'] {
 
 .span-reacao {
   margin-right: 10px;
+  color: #3B568B;
+}
+
+.texto-padrao {
+  color: #5e5e5e;
 }
 
 .btn-reacao {
@@ -203,7 +213,7 @@ form input[type='submit'] {
 }
 
 .desabilitado {
-  color: #ffffff30
+  color: #3B568B59 !important;
 }
 
 .span-msg-invalido {
@@ -240,4 +250,8 @@ form input[type='submit'] {
   padding: 2px;
   border-radius: 5px; 
   border: 3px solid #912626;
+}
+
+.i-azul {
+  color:#3B568B;
 }

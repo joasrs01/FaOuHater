@@ -3,19 +3,19 @@
 <div class="card-padrao">
     <form id="form-usuario" action="/usuario/add" method="post">
         <div class="form-control-bsp">
-            <span for="nome">Nome *</span>
+            <span class="texto-padrao" for="nome">Nome *</span>
             <input class="txt-padrao-bsp" type="text" id="nome" name="nome" placeholder="José José José">
         </div>
         <div class="form-control-bsp">
-            <span style="margin-right: 10px;" for="email">E-mail *</span> <span id="msg-email" class="span-msg-invalido">{{msgEmail}}</span>
+            <span class="texto-padrao" style="margin-right: 10px;" for="email">E-mail *</span> <span id="msg-email" class="span-msg-invalido">{{msgEmail}}</span>
             <input class="txt-padrao-bsp" type="email" id="email" name="email" placeholder="jose@jose.jose">
         </div>
         <div class="form-control-bsp">
-            <span style="margin-right: 10px;" for="login">User *</span> <span id="msg-login" class="span-msg-invalido">{{msgLogin}}</span>
+            <span class="texto-padrao" style="margin-right: 10px;" for="login">User *</span> <span id="msg-login" class="span-msg-invalido">{{msgLogin}}</span>
             <input class="txt-padrao-bsp" type="text" id="login" name="login" placeholder="jose123 / joseddsilva1234">
         </div>
         <div class="form-control-bsp">
-            <span for="senha">Senha *</span>
+            <span class="texto-padrao" for="senha">Senha *</span>
             <input class="txt-padrao-bsp" type="password" id="senha" name="senha" placeholder="senha aqui">
         </div>
         <input class="btn" type="submit" value="Cadastrar">

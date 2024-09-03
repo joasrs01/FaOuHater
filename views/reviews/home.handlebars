@@ -15,27 +15,27 @@
                     </div>
                 </div>
                 <div class="conteudo-review">
-                    <span class="span-review">
+                    <span class="texto-padrao">
                         {{this.review}}
                     </span>
                 </div>
                 <div class="footer-review">
 
                     {{#if ../usuarioAutenticado}}
-                        <button class="btn-like btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like="1"><i id="lr-{{this.id}}u-{{../usuarioAutenticado.userId}}" {{#if this.usuarioLike}} class="bi bi-hand-thumbs-up-fill fs-5" {{else}} class="bi bi-hand-thumbs-up fs-5" {{/if}}></i></button>
+                        <button class="btn-like btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like="1"><i id="lr-{{this.id}}u-{{../usuarioAutenticado.userId}}" {{#if this.usuarioLike}} class="bi bi-hand-thumbs-up-fill fs-5 i-azul" {{else}} class="bi bi-hand-thumbs-up fs-5 i-azul" {{/if}}></i></button>
                     {{else}}
-                        <button disabled="true" class="btn-like btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-up fs-5"></i></button>
+                        <button disabled="true" class="btn-like btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-up fs-5 i-azul"></i></button>
                     {{/if}}
 
                     <span id="qtd-like-{{this.id}}" class="span-reacao">{{this.qtdLikes}}</span>
 
                     {{#if ../usuarioAutenticado}}
-                        <button class="btn-dislike btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like=""><i id="dr-{{this.id}}u-{{../usuarioAutenticado.userId}}" {{#if this.usuarioDislike}} class="bi bi-hand-thumbs-down-fill fs-5" {{else}} class="bi bi-hand-thumbs-down fs-5" {{/if}}></i></button>
+                        <button class="btn-dislike btn-like-dlike" data-review-id={{this.id}} data-usuario-id={{../usuarioAutenticado.userId}} data-like=""><i id="dr-{{this.id}}u-{{../usuarioAutenticado.userId}}" {{#if this.usuarioDislike}} class="bi bi-hand-thumbs-down-fill fs-5 i-azul" {{else}} class="bi bi-hand-thumbs-down fs-5 i-azul" {{/if}}></i></button>
                     {{else}}
-                        <button disabled="true" class="btn-dislike btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-down fs-5"></i></button>
+                        <button disabled="true" class="btn-dislike btn-like-dlike"><i class="desabilitado bi bi-hand-thumbs-down fs-5 i-azul"></i></button>
                     {{/if}}
 
-                    <span id="qtd-dislike-{{this.id}}">{{this.qtdDislikes}}</span>                       
+                    <span id="qtd-dislike-{{this.id}}" class="span-reacao">{{this.qtdDislikes}}</span>                       
                 </div>
             </div>
         </div>
