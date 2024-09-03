@@ -166,6 +166,13 @@ form input[type='submit'] {
   justify-content: center;
 }
 
+.conteudo-review {
+  background-color: #e3e3e3;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .card-padrao {
   border: 1px solid #10151E;
   background-color: #f1f1f1;
