@@ -1,22 +1,22 @@
 <h1>Cadastro do Usuário</h1>
 
 <div class="card-padrao">
-    <form action="/usuario/add" method="post">
+    <form id="form-usuario" action="/usuario/add" method="post">
         <div class="form-control-bsp">
-            <span for="nome">Nome e Sobrenome</span>
-            <input class="txt-padrao-bsp" type="text" name="nome" placeholder="José José José">
+            <span for="nome">Nome *</span>
+            <input class="txt-padrao-bsp" type="text" id="nome" name="nome" placeholder="José José José">
         </div>
         <div class="form-control-bsp">
-            <span for="email">E-mail</span>
-            <input class="txt-padrao-bsp" type="email" name="email" placeholder="jose@jose.jose">
+            <span style="margin-right: 10px;" for="email">E-mail *</span> <span id="msg-email" class="span-msg-invalido"></span>
+            <input class="txt-padrao-bsp" type="email" id="email" name="email" placeholder="jose@jose.jose">
         </div>
         <div class="form-control-bsp">
-            <span for="login">Login</span>
-            <input class="txt-padrao-bsp" type="text" name="login" placeholder="jose123 / joseddsilva1234">
+            <span style="margin-right: 10px;" for="login">User *</span> <span id="msg-login" class="span-msg-invalido"></span>
+            <input class="txt-padrao-bsp" type="text" id="login" name="login" placeholder="jose123 / joseddsilva1234">
         </div>
         <div class="form-control-bsp">
-            <span for="senha">Senha</span>
-            <input class="txt-padrao-bsp" type="password" name="senha" placeholder="senha aqui">
+            <span for="senha">Senha *</span>
+            <input class="txt-padrao-bsp" type="password" id="senha" name="senha" placeholder="senha aqui">
         </div>
         <input class="btn" type="submit" value="Cadastrar">
     </form>

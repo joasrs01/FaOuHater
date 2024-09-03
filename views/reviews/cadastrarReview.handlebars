@@ -1,15 +1,15 @@
 <h1>Cadastro de Review</h1>
 
 <div class="card-padrao">
-    <form action="/reviews/add" method="post">
+    <form id="form-review" action="/reviews/add" method="post">
         <input type="hidden" name="usuario" value={{usuarioAutenticado.userId}}>
         <div class="form-control-bsp">
             <span for="musica">Música:</span>
-            <input class="txt-padrao-bsp" type="text" name="musica" placeholder="Nome da música...">
+            <input class="txt-padrao-bsp" type="text" id="musica" name="musica" placeholder="Nome da música...">
         </div>
         <div class="form-control-bsp">
             <span for="artista">Artista:</span>
-            <input class="txt-padrao-bsp" type="text" name="artista" placeholder="Nome da banda ou artista...">
+            <input class="txt-padrao-bsp" type="text" id="artista" name="artista" placeholder="Nome da banda ou artista...">
         </div>
         <div class="form-control-bsp">
             <span for="titulo">Review:</span>

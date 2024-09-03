@@ -206,10 +206,18 @@ form input[type='submit'] {
   color: #ffffff30
 }
 
-/* -------------------- bootstrap */
+.span-msg-invalido {
+  color: #ff3434;
+  font-size: smaller;
+}
 
 .form-control-bsp {
   margin-bottom: 10px;
+}
+
+.form-control-invalido {
+  border-color: #ff3434;
+  border-radius: 5px; 
 }
 
 .txt-padrao-bsp {
