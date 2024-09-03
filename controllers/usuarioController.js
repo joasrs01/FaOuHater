@@ -8,21 +8,56 @@ module.exports = class UsuarioController {
   }
 
   static async cadastrarUsuario(req, res) {
-    //gera a senha criptografada
-    const senhaHash = bcrypt.hashSync(req.body.senha, 10);
+    let msgEmail = undefined;
+    let msgLogin = undefined;
 
-    let usuario = {
-      nome: req.body.nome,
-      email: req.body.email,
-      login: req.body.login,
-      senha: senhaHash,
-    };
+    const nome = req.body.nome;
+    const email = req.body.email;
+    const login = req.body.login;
+    const senha = req.body.senha;
 
-    usuario = await Usuario.create(usuario);
+    if (
+      (await Usuario.count({
+        where: {
+          email,
+        },
+      })) > 0
+    ) {
+      msgEmail = "E-mail já está sendo utilizado.";
+    }
 
-    gerarCookieToken(res, usuario);
+    if (
+      (await Usuario.count({
+        where: {
+          login,
+        },
+      })) > 0
+    ) {
+      msgLogin = "User já está sendo utilizado.";
+    }
 
-    res.redirect("/");
+    console.log(msgEmail);
+    console.log(msgLogin);
+
+    if (msgEmail || msgLogin) {
+      res.render("usuario/cadastrarUsuario", { msgEmail, msgLogin });
+    } else {
+      //gera a senha criptografada
+      const senhaHash = bcrypt.hashSync(senha, 10);
+
+      let usuario = {
+        nome: nome,
+        email: email,
+        login: login,
+        senha: senhaHash,
+      };
+
+      usuario = await Usuario.create(usuario);
+
+      gerarCookieToken(res, usuario);
+
+      res.redirect("/");
+    }
   }
 
   static abrirLogin(req, res) {
@@ -67,9 +102,6 @@ function gerarCookieToken(res, usuario) {
 }
 
 function gerarTokenAutenticado(usuario) {
-  console.log("id usuario:" + usuario.id);
-  console.log("nome usuario:" + usuario.nome);
-
   return tokenService.assinarToken({
     userId: usuario.id,
     userName: usuario.nome,

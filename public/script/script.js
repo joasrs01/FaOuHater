@@ -120,7 +120,7 @@ function onValidarFormUsuario(event) {
     }
 
     // Login
-    const loginPattern = /^[a-zA-Z0-9_]+$/; // Alfanumérico e underline permitido
+    const loginPattern = /^[a-zA-Z0-9_.]+$/; // Alfanumérico e underline permitido
     if (login.value.trim() === "") {
       valid = false;
       login.classList.add("form-control-invalido");
