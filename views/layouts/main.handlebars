@@ -18,7 +18,7 @@
             {{!-- <li><a  class="btn btn-outline-primary" href="/reviews/add">Cadastrar Review</a></li> --}}
             <div id="nav-cont-direita">
                 {{#if usuarioAutenticado}}
-                    <li><a style="margin-right: 15px;" href="">{{usuarioAutenticado.userName}}</a></li>
+                    <li><a style="margin-right: 15px;" href="/usuario/perfil">{{usuarioAutenticado.userName}}</a></li>
                     <li><a class="btn btn-outline-primary" href="/reviews/add">Cadastrar Review</a></li>
                     <li><a class="btn btn-outline-primary" href="/usuario/logoff">Logoff</a></li>
                 {{else}}
@@ -28,9 +28,9 @@
             </div>
         </ul>
     </nav>
-    <div class="container">
-        {{{body}}}
-    </div>
+    {{!-- <div class="container"> --}}
+    {{{body}}}
+    {{!-- </div> --}}
     <script src="/script/script.js"></script>
 </body>
 </html>

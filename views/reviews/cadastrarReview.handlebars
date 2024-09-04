@@ -1,20 +1,23 @@
-<h1>Cadastro de Review</h1>
 
-<div class="card-padrao">
-    <form id="form-review" action="/reviews/add" method="post">
-        <input type="hidden" name="usuario" value={{usuarioAutenticado.userId}}>
-        <div class="form-control-bsp">
-            <span class="texto-padrao" for="musica">Música:</span>
-            <input class="txt-padrao-bsp" type="text" id="musica" name="musica" placeholder="Nome da música...">
-        </div>
-        <div class="form-control-bsp">
-            <span class="texto-padrao" for="artista">Artista:</span>
-            <input class="txt-padrao-bsp" type="text" id="artista" name="artista" placeholder="Nome da banda ou artista...">
-        </div>
-        <div class="form-control-bsp">
-            <span class="texto-padrao" for="titulo">Review:</span>
-            <textarea class="txt-padrao-bsp" id="txt-area-review" type="text" name="review" placeholder="Escreva aqui o seu review sobre a música"></textarea>
-        </div>
-        <input class="btn" type="submit" value="Cadastrar">
-    </form>
+<div class="container">
+    <h1>Cadastro de Review</h1>
+
+    <div class="card-padrao">
+        <form id="form-review" action="/reviews/add" method="post">
+            <input type="hidden" name="usuario" value={{usuarioAutenticado.userId}}>
+            <div class="form-control-bsp">
+                <span class="texto-padrao" for="musica">Música:</span>
+                <input class="txt-padrao-bsp" type="text" id="musica" name="musica" placeholder="Nome da música...">
+            </div>
+            <div class="form-control-bsp">
+                <span class="texto-padrao" for="artista">Artista:</span>
+                <input class="txt-padrao-bsp" type="text" id="artista" name="artista" placeholder="Nome da banda ou artista...">
+            </div>
+            <div class="form-control-bsp">
+                <span class="texto-padrao" for="titulo">Review:</span>
+                <textarea class="txt-padrao-bsp" id="txt-area-review" type="text" name="review" placeholder="Escreva aqui o seu review sobre a música"></textarea>
+            </div>
+            <input class="btn" type="submit" value="Cadastrar">
+        </form>
+    </div>
 </div>

@@ -1,0 +1,14 @@
+<div class="container-perfil">
+    <div class="perfil-usuario">
+    <div class="card-padrao " style="padding: 25px;">
+        <h2 class="perfil-nome texto-padrao">{{perfil.nome}}</h2>
+        <h5 class="perfil-login texto-padrao">fh/ {{perfil.login}}</h5>
+        <div class="perfil-info">
+            <span class="texto-padrao" >Reviews: {{perfil.qtdreviews}}</span>
+        </div>
+    </div>
+    </div>
+    <div class="reviews-usuario">
+        {{>reviews}}
+    </div>
+</div>

@@ -6,8 +6,13 @@ const reviewsRouters = require("./routers/reviewsRouters");
 const usuariosRouters = require("./routers/usuariosRouters");
 const cookieParser = require("cookie-parser");
 
+//estabelece a pasta de partials ao handlebars
+const hbs = exphbr.create({
+  partialsDir: ["views/partials"],
+});
+
 // view engine
-app.engine("handlebars", exphbr.engine());
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
 // para utilizar cookies
@@ -30,7 +35,7 @@ app.get("/", (req, res) => {
 
 // qualquer endereço digitado ele cai nesse middleware mostrando a pagina 404, ** use
 app.use((req, res) => {
-  res.render("404", { layout: false });
+  res.render("validacao/404");
 });
 
 // inicia o servidor

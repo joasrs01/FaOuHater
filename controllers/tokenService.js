@@ -26,7 +26,36 @@ function validarToken(token) {
   return dadosToken;
 }
 
+function verificarToken(req, res, next) {
+  const token = req.cookies ? req.cookies.token_usuario_foh : undefined;
+  if (token) {
+    const dadosToken = validarToken(token);
+    req.usuario = dadosToken;
+  }
+
+  next();
+}
+
+function verificarTokenThrow(req, res, next) {
+  const token = req.cookies ? req.cookies.token_usuario_foh : undefined;
+  console.log("verifica token throw");
+
+  if (!token) {
+    return res.status(401).send("Acesso negado: Nenhum token fornecido.");
+  }
+
+  let dadosToken = validarToken(token);
+
+  if (!dadosToken) {
+    return res.status(401).send("Acesso negado: Token Inválido.");
+  }
+
+  req.usuario = dadosToken;
+  next();
+}
+
 module.exports = {
   assinarToken,
-  validarToken,
+  verificarToken,
+  verificarTokenThrow,
 };

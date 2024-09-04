@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const Usuario = require("../models/usuarioModel");
 const tokenService = require("./tokenService");
+const reviewController = require("./reviewController");
+const { Sequelize } = require("sequelize");
 
 module.exports = class UsuarioController {
   static abrirCadastroUsuario(req, res) {
@@ -88,6 +90,44 @@ module.exports = class UsuarioController {
   static logoffUsuario(req, res) {
     res.clearCookie("token_usuario_foh");
     res.redirect("/");
+  }
+
+  static async perfilUsuario(req, res) {
+    console.log(req.params.id);
+    //console.log(req.params.id ?? req.usuario ? req.usuario.userId : 0);
+
+    let idUsuario = req.params.id;
+    if (!idUsuario) {
+      idUsuario = req.usuario ? req.usuario.userId : undefined;
+    }
+
+    if (isNaN(idUsuario)) {
+      res.render("validacao/perfilNaoEncontrado");
+    } else {
+      const reviews = await reviewController.buscarReviewsDoUsuario(idUsuario);
+
+      const perfil = await Usuario.findOne({
+        raw: true,
+        attributes: {
+          include: [
+            Sequelize.literal(
+              `( SELECT COUNT(1) FROM "Reviews" WHERE "Reviews"."UsuarioId" = ${idUsuario} ) AS qtdReviews`
+            ),
+          ],
+        },
+        where: { id: idUsuario },
+      });
+
+      if (perfil) {
+        res.render("usuario/perfilUsuario", {
+          usuarioAutenticado: req.usuario,
+          reviews,
+          perfil,
+        });
+      } else {
+        res.render("validacao/perfilNaoEncontrado");
+      }
+    }
   }
 };
 
