@@ -11,7 +11,11 @@ router.get(
   tokenService.verificarTokenThrow,
   usuarioController.perfilUsuario
 );
-router.get("/perfil/:id", usuarioController.perfilUsuario);
+router.get(
+  "/perfil/:id",
+  tokenService.verificarToken,
+  usuarioController.perfilUsuario
+);
 router.post("/add", usuarioController.cadastrarUsuario);
 router.post("/login", usuarioController.autenticarUsuario);
 

@@ -20,5 +20,10 @@ router.post(
   tokenService.verificarTokenThrow,
   reviewController.dislike
 );
+router.post(
+  "/remover",
+  tokenService.verificarTokenThrow,
+  reviewController.removerReview
+);
 
 module.exports = router;

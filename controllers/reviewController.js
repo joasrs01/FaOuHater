@@ -51,8 +51,14 @@ module.exports = class ReviewController {
     );
   }
 
-  static async buscarReviewsDoUsuario(usuarioId) {
-    return buscarReviewsDoUsuario(usuarioId);
+  static async buscarReviewsDoUsuario(usuarioId, idUsuarioAutenticado) {
+    return buscarReviewsDoUsuario(usuarioId, idUsuarioAutenticado);
+  }
+
+  static async removerReview(req, res) {
+    Review.destroy({ where: { id: req.body.idReview } });
+
+    res.redirect(req.get("Referer"));
   }
 };
 
@@ -111,10 +117,10 @@ async function buscarTodasReviews(usuarioId) {
     order: [["updatedAt", "DESC"]],
   });
 
-  return prepararReviews(reviews);
+  return prepararReviews(reviews, usuarioId);
 }
 
-function prepararReviews(reviews) {
+function prepararReviews(reviews, usuarioId) {
   reviews.forEach((e) => {
     let dia = String(e.updatedAt.getDate()).padStart(2, "0");
     let mes = String(e.updatedAt.getMonth() + 1).padStart(2, "0");
@@ -127,12 +133,14 @@ function prepararReviews(reviews) {
     e.modDataAtualizacao = `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
     e.nomeUsuario = e["Usuario.login"];
     e.idUsuario = e["Usuario.id"];
+    e.apresentarOpcoes =
+      usuarioId === e.idUsuario ? true : usuarioId === 1 ? true : false;
   });
 
   return reviews;
 }
 
-async function buscarReviewsDoUsuario(usuarioId) {
+async function buscarReviewsDoUsuario(usuarioId, idUsuarioAutenticado) {
   let reviews = await Review.findAll({
     raw: true,
     include: [
@@ -151,7 +159,7 @@ async function buscarReviewsDoUsuario(usuarioId) {
           Sequelize.literal(`(
             SELECT "R"."like"
             FROM "Reacoes" AS "R"
-            WHERE "R"."UsuarioId" = ${usuarioId}
+            WHERE "R"."UsuarioId" = ${idUsuarioAutenticado}
             AND "R"."ReviewId" = "Review"."id"
           )`),
           "usuarioLike",
@@ -160,7 +168,7 @@ async function buscarReviewsDoUsuario(usuarioId) {
           Sequelize.literal(`(
             SELECT "R"."dislike"
             FROM "Reacoes" AS "R"
-            WHERE "R"."UsuarioId" = ${usuarioId}
+            WHERE "R"."UsuarioId" = ${idUsuarioAutenticado}
             AND "R"."ReviewId" = "Review"."id"
           )`),
           "usuarioDislike",
@@ -190,5 +198,5 @@ async function buscarReviewsDoUsuario(usuarioId) {
     order: [["updatedAt", "DESC"]],
   });
 
-  return prepararReviews(reviews);
+  return prepararReviews(reviews, idUsuarioAutenticado);
 }

@@ -97,14 +97,19 @@ module.exports = class UsuarioController {
     //console.log(req.params.id ?? req.usuario ? req.usuario.userId : 0);
 
     let idUsuario = req.params.id;
+    let idUsuarioAutenticado = req.usuario ? req.usuario.userId : 0;
+
     if (!idUsuario) {
-      idUsuario = req.usuario ? req.usuario.userId : undefined;
+      idUsuario = idUsuarioAutenticado;
     }
 
     if (isNaN(idUsuario)) {
       res.render("validacao/perfilNaoEncontrado");
     } else {
-      const reviews = await reviewController.buscarReviewsDoUsuario(idUsuario);
+      const reviews = await reviewController.buscarReviewsDoUsuario(
+        idUsuario,
+        idUsuarioAutenticado
+      );
 
       const perfil = await Usuario.findOne({
         raw: true,

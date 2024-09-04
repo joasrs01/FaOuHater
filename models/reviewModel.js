@@ -25,7 +25,9 @@ const Review = conexao.define("Review", {
   },
 });
 
-Usuario.hasMany(Review);
+Usuario.hasMany(Review, {
+  onDelete: "CASCADE",
+});
 Review.belongsTo(Usuario);
 
 Review.sync()

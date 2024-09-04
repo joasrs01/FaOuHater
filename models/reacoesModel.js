@@ -17,8 +17,12 @@ const Reacoes = conexao.define("Reacoes", {
 Reacoes.belongsTo(Usuario);
 Reacoes.belongsTo(Review);
 
-Usuario.hasMany(Reacoes);
-Review.hasMany(Reacoes);
+Usuario.hasMany(Reacoes, {
+  onDelete: "CASCADE",
+});
+Review.hasMany(Reacoes, {
+  onDelete: "CASCADE",
+});
 
 Reacoes.sync()
   //.sync({ force: true })
