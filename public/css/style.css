@@ -1,6 +1,6 @@
 * {
   font-family: Helvetica, sans-serif;
-  color: #cccccc;
+  color: #5e5e5e;
   margin: 0;
   padding: 0;
 }
@@ -101,9 +101,25 @@ h1 {
   height: 250px;
 }
 
+.txt-area-comentario {
+  resize: none;
+  height: 45px;
+}
+
 .drop-menu {
   margin-top: 0px !important;
   padding: 5px !important; 
+}
+
+.btn-carregar-comentarios {
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  font-size: smaller;
+}
+
+.btn-carregar-comentarios:hover {
+  color: #3B568B;
 }
 
 form input[type='submit'] {
@@ -118,6 +134,23 @@ form input[type='submit'] {
 
 .card-review {
   width: 100%;
+  border-radius: 5px 5px 5px 5px !important;
+}
+
+.card-comentarios {
+  display: block;
+  padding: 15px 15px 15px 15px;
+  background-color: #c8c8c8;
+  width: 100%;
+  margin-top: -3px;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.add-comentario {
+  display: flex;
+}
+
+.review-m {
   margin-bottom: 10px;
 }
 
@@ -224,7 +257,6 @@ form input[type='submit'] {
 }
 
 .card-padrao {
-  border: 1px solid #10151E;
   background-color: #f1f1f1;
   border-radius: 5px;
 }
@@ -303,4 +335,28 @@ form input[type='submit'] {
 
 .i-azul {
   color:#3B568B;
+}
+
+.card-comentario {
+  border: 1px solid gray;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 3px;
+}
+
+.h-card-comentario {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.comentario-data {
+  font-size: small;
+}
+
+.btn-comentar {
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  margin-left: 8px;
 }

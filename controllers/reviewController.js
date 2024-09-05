@@ -111,6 +111,14 @@ async function buscarTodasReviews(usuarioId) {
           ),
           "qtdDislikes",
         ],
+        [
+          Sequelize.literal(`(
+            SELECT COUNT(1)
+            FROM "Comentarios"
+            WHERE "Comentarios"."idOrigem" = "Review"."id" 
+          )`),
+          "qtdComentarios",
+        ],
       ],
     },
     group: ["Review.id", "Usuario.id"],
@@ -188,6 +196,14 @@ async function buscarReviewsDoUsuario(usuarioId, idUsuarioAutenticado) {
             Sequelize.literal(`CASE WHEN "Reacoes"."dislike" = '1' THEN 1 END`)
           ),
           "qtdDislikes",
+        ],
+        [
+          Sequelize.literal(`(
+            SELECT COUNT(1)
+            FROM "Comentarios"
+            WHERE "Comentarios"."idOrigem" = "Review"."id" 
+          )`),
+          "qtdComentarios",
         ],
       ],
     },

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const reviewController = require("../controllers/reviewController");
+const comentarioController = require("../controllers/comentarioController");
 const tokenService = require("../controllers/tokenService");
 
 router.get("/", tokenService.verificarToken, reviewController.exibirHome);
@@ -25,5 +26,11 @@ router.post(
   tokenService.verificarTokenThrow,
   reviewController.removerReview
 );
+router.post(
+  "/comentario/add",
+  tokenService.verificarTokenThrow,
+  comentarioController.adicionarComentario
+);
+router.get("/comentarios/:idReview", comentarioController.buscarComentarios);
 
 module.exports = router;

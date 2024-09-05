@@ -1,6 +1,12 @@
 const btnsLike = document.querySelectorAll(".btn-like-dlike");
 const formUsuario = document.querySelector("#form-usuario");
 const formReview = document.querySelector("#form-review");
+const btnsEnviarComentario = document.querySelectorAll(
+  "#btn-enviar-comentario"
+);
+const btnsCarregarComentarios = document.querySelectorAll(
+  "#btn-carregar-comentarios"
+);
 
 btnsLike.forEach((btn) => {
   btn.addEventListener("click", async () => {
@@ -8,51 +14,51 @@ btnsLike.forEach((btn) => {
     let idUsuario = btn.getAttribute("data-usuario-id");
     let bLike = Boolean(btn.getAttribute("data-like"));
 
-    try {
-      let resposta = await fetch(`reviews/${!bLike ? "dis" : ""}like`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          reviewId: idReview,
-          usuarioId: idUsuario,
-        }),
-      });
+    fetch(`reviews/${!bLike ? "dis" : ""}like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        reviewId: idReview,
+        usuarioId: idUsuario,
+      }),
+    })
+      .then(async (resposta) => {
+        if (resposta.ok) {
+          let resultado = await resposta.json();
 
-      if (resposta.ok) {
-        let resultado = await resposta.json();
+          let qtdLike = document.querySelector(`#qtd-like-${idReview}`);
+          let qtdDislike = document.querySelector(`#qtd-dislike-${idReview}`);
 
-        let qtdLike = document.querySelector(`#qtd-like-${idReview}`);
-        let qtdDislike = document.querySelector(`#qtd-dislike-${idReview}`);
+          let iconLike = document.querySelector(
+            `#lr-${idReview}u-${idUsuario}`
+          );
+          let iconDisLike = document.querySelector(
+            `#dr-${idReview}u-${idUsuario}`
+          );
 
-        let iconLike = document.querySelector(`#lr-${idReview}u-${idUsuario}`);
-        let iconDisLike = document.querySelector(
-          `#dr-${idReview}u-${idUsuario}`
-        );
+          if (resultado.jsnRetorno.like) {
+            iconLike.classList.remove("bi-hand-thumbs-up");
+            iconLike.classList.add("bi-hand-thumbs-up-fill");
+          } else {
+            iconLike.classList.remove("bi-hand-thumbs-up-fill");
+            iconLike.classList.add("bi-hand-thumbs-up");
+          }
 
-        if (resultado.jsnRetorno.like) {
-          iconLike.classList.remove("bi-hand-thumbs-up");
-          iconLike.classList.add("bi-hand-thumbs-up-fill");
-        } else {
-          iconLike.classList.remove("bi-hand-thumbs-up-fill");
-          iconLike.classList.add("bi-hand-thumbs-up");
+          if (resultado.jsnRetorno.dislike) {
+            iconDisLike.classList.remove("bi-hand-thumbs-down");
+            iconDisLike.classList.add("bi-hand-thumbs-down-fill");
+          } else {
+            iconDisLike.classList.remove("bi-hand-thumbs-down-fill");
+            iconDisLike.classList.add("bi-hand-thumbs-down");
+          }
+
+          qtdLike.innerHTML = resultado.jsnRetorno.qtds.qtdLikes;
+          qtdDislike.innerHTML = resultado.jsnRetorno.qtds.qtdDislikes;
         }
-
-        if (resultado.jsnRetorno.dislike) {
-          iconDisLike.classList.remove("bi-hand-thumbs-down");
-          iconDisLike.classList.add("bi-hand-thumbs-down-fill");
-        } else {
-          iconDisLike.classList.remove("bi-hand-thumbs-down-fill");
-          iconDisLike.classList.add("bi-hand-thumbs-down");
-        }
-
-        qtdLike.innerHTML = resultado.jsnRetorno.qtds.qtdLikes;
-        qtdDislike.innerHTML = resultado.jsnRetorno.qtds.qtdDislikes;
-      }
-    } catch (error) {
-      console.log(`erro ao ${!bLike ? "des" : ""}curtir a review: ` + error);
-    }
+      })
+      .catch((err) => console.log("erro ao adicionar comentario: " + err));
   });
 });
 
@@ -60,9 +66,122 @@ if (formUsuario) {
   formUsuario.addEventListener("submit", onValidarFormUsuario);
 }
 
-console.log(formReview);
 if (formReview) {
   formReview.addEventListener("submit", onValidarFormReview);
+}
+
+function verificarComentarioInformado(idReview) {
+  let valido = true;
+  let comentario = document.querySelector(`#cmr-${idReview}`);
+  comentario.classList.remove("form-control-invalido");
+
+  if (comentario.value.trim() === "") {
+    valido = false;
+    comentario.classList.add("form-control-invalido");
+  }
+
+  return valido;
+}
+
+if (btnsEnviarComentario) {
+  btnsEnviarComentario.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      let idReview = btn.getAttribute("data-review-id");
+
+      if (idReview && verificarComentarioInformado(idReview)) {
+        let comentario = document.querySelector(`#cmr-${idReview}`);
+        let tipoOrigem = "review";
+        let idOrigem = btn.getAttribute("data-review-id");
+
+        let resultado = await fetch(`../reviews/comentario/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            comentario: comentario.value,
+            tipoOrigem: tipoOrigem,
+            idOrigem: idOrigem,
+          }),
+        });
+
+        if (resultado.ok && idReview) {
+          console.log("entrou carregar automatico");
+          carregarComentarios(idReview);
+        }
+
+        comentario.value = "";
+      }
+    });
+  });
+}
+
+if (btnsCarregarComentarios) {
+  btnsCarregarComentarios.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      let idReview = btn.getAttribute("data-review-id");
+
+      if (idReview) {
+        carregarComentarios(idReview);
+      }
+    });
+  });
+}
+
+async function carregarComentarios(idReview) {
+  fetch(`../reviews/comentarios/${idReview}`)
+    .then(async (resposta) => {
+      if (resposta.ok) {
+        console.log(resposta);
+        let respostaJson = await resposta.json();
+
+        if (respostaJson) {
+          const divTempExistente = document.querySelectorAll(
+            `#temp-cr${idReview}`
+          );
+
+          // vai apagar o que ja tinha sido carregado para recriar
+          if (divTempExistente) {
+            divTempExistente.forEach((e) => e.remove());
+          }
+
+          const divPai = document.querySelector(`#comr-${idReview}`);
+
+          respostaJson.forEach((e) => {
+            //span comentario
+            const spanComentario = document.createElement("span");
+            spanComentario.classList.add("comentario-comentario");
+            spanComentario.innerHTML = e.comentario;
+
+            //span usuario
+            const spanUsuario = document.createElement("span");
+            spanUsuario.classList.add("comentario-usuario");
+            spanUsuario.innerHTML = "fh/ " + e["Usuario.login"];
+
+            //span data
+            const spanData = document.createElement("span");
+            spanData.classList.add("comentario-data");
+            spanData.innerHTML = e.modDataAtualizacao;
+
+            const divHeadComentario = document.createElement("div");
+            divHeadComentario.classList.add("h-card-comentario");
+
+            divHeadComentario.appendChild(spanUsuario);
+            divHeadComentario.appendChild(spanData);
+
+            const divCardComentario = document.createElement("div");
+            divCardComentario.classList.add("card-comentario");
+            divCardComentario.id = `temp-cr${idReview}`;
+
+            divCardComentario.appendChild(divHeadComentario);
+            divCardComentario.appendChild(spanComentario);
+
+            divPai.appendChild(divCardComentario);
+          });
+        }
+      }
+    })
+    .catch((err) => console.log("erro ao adicionar comentario: " + err));
 }
 
 function onValidarFormReview(event) {
