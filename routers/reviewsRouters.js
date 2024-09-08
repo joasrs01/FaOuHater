@@ -31,6 +31,15 @@ router.post(
   tokenService.verificarTokenThrow,
   comentarioController.adicionarComentario
 );
-router.get("/comentarios/:idReview", comentarioController.buscarComentarios);
+router.get(
+  "/comentario/remover/:idComentario",
+  tokenService.verificarTokenThrow,
+  comentarioController.removerComentario
+);
+router.get(
+  "/comentarios/:idReview",
+  tokenService.verificarToken,
+  comentarioController.buscarComentarios
+);
 
 module.exports = router;
