@@ -70,6 +70,20 @@ if (formReview) {
   formReview.addEventListener("submit", onValidarFormReview);
 }
 
+async function removerComentario(event) {
+  let idComentario = event.target.getAttribute("data-comentario");
+
+  if (idComentario && idComentario > 0) {
+    let resposta = await fetch(
+      `../../reviews/comentario/remover/${idComentario}`
+    );
+
+    if (resposta.ok) {
+      carregarComentarios(event.target.getAttribute("data-review"));
+    }
+  }
+}
+
 function verificarComentarioInformado(idReview) {
   let valido = true;
   let comentario = document.querySelector(`#cmr-${idReview}`);
@@ -129,10 +143,9 @@ if (btnsCarregarComentarios) {
 }
 
 async function carregarComentarios(idReview) {
-  fetch(`../reviews/comentarios/${idReview}`)
+  fetch(`../../reviews/comentarios/${idReview}`)
     .then(async (resposta) => {
       if (resposta.ok) {
-        console.log(resposta);
         let respostaJson = await resposta.json();
 
         if (respostaJson) {
@@ -147,11 +160,62 @@ async function carregarComentarios(idReview) {
 
           const divPai = document.querySelector(`#comr-${idReview}`);
 
-          respostaJson.forEach((e) => {
+          respostaJson.comentarios.forEach((e) => {
+            //div conteudo do comentario
+            const divConteudo = document.createElement("div");
+            divConteudo.classList.add("comentario-conteudo");
+
             //span comentario
             const spanComentario = document.createElement("span");
             spanComentario.classList.add("comentario-comentario");
             spanComentario.innerHTML = e.comentario;
+
+            divConteudo.appendChild(spanComentario);
+
+            if (e.apresentarOpcoes) {
+              //imagem
+              const imagem = document.createElement("i");
+              imagem.classList.add("bi");
+              imagem.classList.add("bi-three-dots-vertical");
+              imagem.classList.add("fs-5");
+              imagem.classList.add("icone-opcoes");
+
+              //botao opçoes
+              const btnOpcoes = document.createElement("button");
+              btnOpcoes.classList.add("btn-padrao-h");
+              btnOpcoes.classList.add("btn-opcoes");
+              btnOpcoes.id = "dropdownMenuButton";
+              btnOpcoes.setAttribute("data-toggle", "dropdown");
+              btnOpcoes.setAttribute("aria-haspopup", "true");
+              btnOpcoes.setAttribute("aria-expanded", "false");
+
+              btnOpcoes.appendChild(imagem);
+
+              //div dropdown opçoes
+              const divOpcoes = document.createElement("div");
+              divOpcoes.classList.add("opcoes");
+              divOpcoes.classList.add("dropdown");
+
+              const botaoOpcoes = document.createElement("input");
+              botaoOpcoes.type = "button";
+              botaoOpcoes.value = "Remover";
+              botaoOpcoes.id = "btn-opcoes-comentario";
+              botaoOpcoes.addEventListener("click", removerComentario);
+              botaoOpcoes.setAttribute("data-comentario", e.id);
+              botaoOpcoes.setAttribute("data-review", e.idOrigem);
+              botaoOpcoes.classList.add("drop-menu");
+              botaoOpcoes.classList.add("dropdown-menu");
+              botaoOpcoes.classList.add("remover-review");
+              botaoOpcoes.setAttribute(
+                "daria-labelledby",
+                "dropdownMenuButton"
+              );
+
+              divOpcoes.appendChild(btnOpcoes);
+              divOpcoes.appendChild(botaoOpcoes);
+
+              divConteudo.appendChild(divOpcoes);
+            }
 
             //span usuario
             const spanUsuario = document.createElement("span");
@@ -174,12 +238,18 @@ async function carregarComentarios(idReview) {
             divCardComentario.id = `temp-cr${idReview}`;
 
             divCardComentario.appendChild(divHeadComentario);
-            divCardComentario.appendChild(spanComentario);
+            divCardComentario.appendChild(divConteudo);
 
             divPai.appendChild(divCardComentario);
           });
         }
       }
+
+      const divAddComentario = document.querySelector(
+        `#div-com-add-${idReview}`
+      );
+
+      divAddComentario.hidden = false;
     })
     .catch((err) => console.log("erro ao adicionar comentario: " + err));
 }

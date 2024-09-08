@@ -38,9 +38,6 @@ module.exports = class UsuarioController {
       msgLogin = "User já está sendo utilizado.";
     }
 
-    console.log(msgEmail);
-    console.log(msgLogin);
-
     if (msgEmail || msgLogin) {
       res.render("usuario/cadastrarUsuario", { msgEmail, msgLogin });
     } else {
@@ -142,7 +139,7 @@ function gerarCookieToken(res, usuario) {
   res.cookie("token_usuario_foh", token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    maxAge: 3600000, // 1 hora
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 1 hora
   });
 }
 

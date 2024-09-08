@@ -3,10 +3,8 @@ const chaveToken = "1wish-you-were-here2";
 
 function assinarToken(dadosToken) {
   const token = jwt.sign(dadosToken, chaveToken, {
-    expiresIn: "1h",
+    expiresIn: "7d",
   });
-
-  console.log("token gerado: " + token);
 
   return token;
 }
@@ -38,7 +36,6 @@ function verificarToken(req, res, next) {
 
 function verificarTokenThrow(req, res, next) {
   const token = req.cookies ? req.cookies.token_usuario_foh : undefined;
-  console.log("verifica token throw");
 
   if (!token) {
     return res.status(401).send("Acesso negado: Nenhum token fornecido.");

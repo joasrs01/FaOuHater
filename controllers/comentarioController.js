@@ -12,6 +12,15 @@ module.exports = class comentarioController {
     }
   }
 
+  static async removerComentario(req, res) {
+    try {
+      await removerComentario(req, res);
+    } catch (error) {
+      console.log("erro encontrado ao buscar comentarios: " + error);
+      res.render("valiadacao/404");
+    }
+  }
+
   static async buscarComentarios(req, res) {
     try {
       await buscarComentarios(req, res);
@@ -30,7 +39,12 @@ async function buscarComentarios(req, res) {
     raw: true,
     where: { idOrigem: reviewId },
     include: { model: Usuario, attributes: ["login"] },
+    order: [["createdAt"]],
   });
+
+  // console.log(req.usuario);
+  let idUsuario = req.usuario ? req.usuario.userId : 0;
+  // console.log(idUsuario);
 
   comentarios.forEach((e) => {
     let dia = String(e.updatedAt.getDate()).padStart(2, "0");
@@ -42,11 +56,18 @@ async function buscarComentarios(req, res) {
     let segundos = String(e.updatedAt.getSeconds()).padStart(2, "0");
 
     e.modDataAtualizacao = `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
+    e.apresentarOpcoes =
+      e.UsuarioId === idUsuario ? true : idUsuario === 1 ? true : false;
   });
 
-  console.log(comentarios);
+  const retorno = {
+    comentarios,
+    usuarioAutenticado: idUsuario > 0,
+  };
 
-  res.status(200).send(await JSON.stringify(comentarios));
+  console.log(retorno);
+
+  res.status(200).send(await JSON.stringify(retorno));
 }
 
 async function adicionarComentario(req, res) {
@@ -62,5 +83,19 @@ async function adicionarComentario(req, res) {
     UsuarioId,
   });
 
-  res.redirect("/");
+  res.status(201).send("Comentário adicionado com sucesso!");
+}
+
+async function removerComentario(req, res) {
+  let resultado = await Comentario.destroy({
+    where: { id: req.params.idComentario },
+  });
+
+  let retorno = resultado === 1 ? 201 : 200;
+  let msgRetorno =
+    retorno == 201
+      ? "Comentário deletado com sucesso!"
+      : "Comentário não foi localizado para exclusão";
+
+  res.status(retorno).send(msgRetorno);
 }
