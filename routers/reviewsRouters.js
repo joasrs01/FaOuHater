@@ -41,5 +41,9 @@ router.get(
   tokenService.verificarToken,
   comentarioController.buscarComentarios
 );
+router.get(
+  "/comentarios/qtd/:idReview",
+  comentarioController.buscarQtdComentarios
+);
 
 module.exports = router;

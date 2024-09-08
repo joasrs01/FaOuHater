@@ -8,59 +8,61 @@ const btnsCarregarComentarios = document.querySelectorAll(
   "#btn-carregar-comentarios"
 );
 
-btnsLike.forEach((btn) => {
-  btn.addEventListener("click", async () => {
-    let idReview = btn.getAttribute("data-review-id");
-    let idUsuario = btn.getAttribute("data-usuario-id");
-    let bLike = Boolean(btn.getAttribute("data-like"));
+if (btnsLike) {
+  btnsLike.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      let idReview = btn.getAttribute("data-review-id");
+      let idUsuario = btn.getAttribute("data-usuario-id");
+      let bLike = Boolean(btn.getAttribute("data-like"));
 
-    fetch(`reviews/${!bLike ? "dis" : ""}like`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        reviewId: idReview,
-        usuarioId: idUsuario,
-      }),
-    })
-      .then(async (resposta) => {
-        if (resposta.ok) {
-          let resultado = await resposta.json();
-
-          let qtdLike = document.querySelector(`#qtd-like-${idReview}`);
-          let qtdDislike = document.querySelector(`#qtd-dislike-${idReview}`);
-
-          let iconLike = document.querySelector(
-            `#lr-${idReview}u-${idUsuario}`
-          );
-          let iconDisLike = document.querySelector(
-            `#dr-${idReview}u-${idUsuario}`
-          );
-
-          if (resultado.jsnRetorno.like) {
-            iconLike.classList.remove("bi-hand-thumbs-up");
-            iconLike.classList.add("bi-hand-thumbs-up-fill");
-          } else {
-            iconLike.classList.remove("bi-hand-thumbs-up-fill");
-            iconLike.classList.add("bi-hand-thumbs-up");
-          }
-
-          if (resultado.jsnRetorno.dislike) {
-            iconDisLike.classList.remove("bi-hand-thumbs-down");
-            iconDisLike.classList.add("bi-hand-thumbs-down-fill");
-          } else {
-            iconDisLike.classList.remove("bi-hand-thumbs-down-fill");
-            iconDisLike.classList.add("bi-hand-thumbs-down");
-          }
-
-          qtdLike.innerHTML = resultado.jsnRetorno.qtds.qtdLikes;
-          qtdDislike.innerHTML = resultado.jsnRetorno.qtds.qtdDislikes;
-        }
+      fetch(`reviews/${!bLike ? "dis" : ""}like`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          reviewId: idReview,
+          usuarioId: idUsuario,
+        }),
       })
-      .catch((err) => console.log("erro ao adicionar comentario: " + err));
+        .then(async (resposta) => {
+          if (resposta.ok) {
+            let resultado = await resposta.json();
+
+            let qtdLike = document.querySelector(`#qtd-like-${idReview}`);
+            let qtdDislike = document.querySelector(`#qtd-dislike-${idReview}`);
+
+            let iconLike = document.querySelector(
+              `#lr-${idReview}u-${idUsuario}`
+            );
+            let iconDisLike = document.querySelector(
+              `#dr-${idReview}u-${idUsuario}`
+            );
+
+            if (resultado.jsnRetorno.like) {
+              iconLike.classList.remove("bi-hand-thumbs-up");
+              iconLike.classList.add("bi-hand-thumbs-up-fill");
+            } else {
+              iconLike.classList.remove("bi-hand-thumbs-up-fill");
+              iconLike.classList.add("bi-hand-thumbs-up");
+            }
+
+            if (resultado.jsnRetorno.dislike) {
+              iconDisLike.classList.remove("bi-hand-thumbs-down");
+              iconDisLike.classList.add("bi-hand-thumbs-down-fill");
+            } else {
+              iconDisLike.classList.remove("bi-hand-thumbs-down-fill");
+              iconDisLike.classList.add("bi-hand-thumbs-down");
+            }
+
+            qtdLike.innerHTML = resultado.jsnRetorno.qtds.qtdLikes;
+            qtdDislike.innerHTML = resultado.jsnRetorno.qtds.qtdDislikes;
+          }
+        })
+        .catch((err) => console.log("erro ao reagir ao comentario: " + err));
+    });
   });
-});
+}
 
 if (formUsuario) {
   formUsuario.addEventListener("submit", onValidarFormUsuario);
@@ -68,6 +70,20 @@ if (formUsuario) {
 
 if (formReview) {
   formReview.addEventListener("submit", onValidarFormReview);
+}
+
+async function atribuirQtdComentarios(idReview) {
+  const resultado = await fetch(`../../reviews/comentarios/qtd/${idReview}`);
+  if (resultado.ok) {
+    let qtd = await resultado.json();
+    let spanQtdComentario = document.querySelector(
+      `#qtd-comentarios-${idReview}`
+    );
+
+    if (spanQtdComentario) {
+      spanQtdComentario.innerHTML = qtd;
+    }
+  }
 }
 
 async function removerComentario(event) {
@@ -79,7 +95,9 @@ async function removerComentario(event) {
     );
 
     if (resposta.ok) {
-      carregarComentarios(event.target.getAttribute("data-review"));
+      let idReview = event.target.getAttribute("data-review");
+      carregarComentarios(idReview);
+      atribuirQtdComentarios(idReview);
     }
   }
 }
@@ -120,8 +138,8 @@ if (btnsEnviarComentario) {
         });
 
         if (resultado.ok && idReview) {
-          console.log("entrou carregar automatico");
           carregarComentarios(idReview);
+          atribuirQtdComentarios(idReview);
         }
 
         comentario.value = "";
@@ -135,8 +153,14 @@ if (btnsCarregarComentarios) {
     btn.addEventListener("click", async () => {
       let idReview = btn.getAttribute("data-review-id");
 
-      if (idReview) {
+      const divAddComentario = document.querySelector(
+        `#div-com-add-${idReview}`
+      );
+
+      if (divAddComentario.hidden) {
         carregarComentarios(idReview);
+      } else {
+        divAddComentario.hidden = true;
       }
     });
   });

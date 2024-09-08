@@ -276,7 +276,7 @@ form input[type='submit'] {
   margin-bottom: 15px;
 }
 
-.btn-like-dlike {
+.btn-like-dlike, .btn-comentarios {
   background: transparent;
   border: none;
   color: #BEBEBE;

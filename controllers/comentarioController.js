@@ -29,11 +29,29 @@ module.exports = class comentarioController {
       res.render("valiadacao/404");
     }
   }
+
+  static async buscarQtdComentarios(req, res) {
+    try {
+      await buscarQtdComentarios(req, res);
+    } catch (error) {
+      console.log("erro encontrado ao buscar comentarios: " + error);
+      res.render("valiadacao/404");
+    }
+  }
 };
+
+async function buscarQtdComentarios(req, res) {
+  let idReview = req.params.idReview;
+
+  let qtdComentarios = await Comentario.count({
+    where: { idOrigem: idReview },
+  });
+
+  res.status(200).send(await JSON.stringify(qtdComentarios));
+}
 
 async function buscarComentarios(req, res) {
   const reviewId = req.params.idReview;
-  console.log("cheegou aqui");
 
   const comentarios = await Comentario.findAll({
     raw: true,
@@ -64,8 +82,6 @@ async function buscarComentarios(req, res) {
     comentarios,
     usuarioAutenticado: idUsuario > 0,
   };
-
-  console.log(retorno);
 
   res.status(200).send(await JSON.stringify(retorno));
 }
