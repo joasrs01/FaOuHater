@@ -153,8 +153,14 @@ if (btnsCarregarComentarios) {
     btn.addEventListener("click", async () => {
       let idReview = btn.getAttribute("data-review-id");
 
-      if (idReview) {
+      const divAddComentario = document.querySelector(
+        `#div-com-add-${idReview}`
+      );
+
+      if (divAddComentario.hidden) {
         carregarComentarios(idReview);
+      } else {
+        divAddComentario.hidden = true;
       }
     });
   });
