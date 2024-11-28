@@ -33,6 +33,9 @@
                 {{/if}}
 
                 <span id="qtd-dislike-{{this.id}}" class="span-reacao">{{this.qtdDislikes}}</span>         
+
+                <button id="btn-carregar-comentarios" class="btn-padrao-h btn-comentarios" data-review-id={{this.id}}><i class="bi bi-chat fs-5 i-azul"></i></button>
+                <span id="qtd-comentarios-{{this.id}}" class="span-reacao">{{this.qtdComentarios}}</span>         
             </div>
             {{#if this.apresentarOpcoes}}
                 <div class="opcoes dropdown">
@@ -47,15 +50,13 @@
             {{/if}}
         </div>
     </div>
-    <div class="card-comentarios">
+    <div class="card-comentarios" id="div-com-add-{{this.id}}" hidden>
             <div class="comentarios">
-                <input class="btn-carregar-comentarios texto-padrao" type="button" value="{{qtdComentarios}} comentários" id="btn-carregar-comentarios" style="padding: 5px" data-review-id={{this.id}}>
                 <div id="comr-{{id}}"></div>
             </div>
         {{#if ../usuarioAutenticado}}
             <div class="add-comentario">
                 <textarea placeholder="Digite um comentário aqui" class="txt-padrao-bsp txt-area-comentario" name="comentario" id="cmr-{{this.id}}"></textarea>
-                {{!-- <input class="texto-padrao" type="button" value="Enviar" id="btn-enviar-comentario" style="padding: 5px" data-review-id={{this.id}}> --}}
                 <button class="btn-comentar btn-padrao-h" id="btn-enviar-comentario" style="padding: 5px" data-review-id={{this.id}}><i class="bi bi-chat-text-fill fs-4 i-azul"></i></button>
             </div>
         {{/if}}
