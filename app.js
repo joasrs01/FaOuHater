@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/reviews", reviewsRouters);
 app.use("/usuario", usuariosRouters);
 // seta a pasta publica padrão
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 //rota padrão
 app.get("/", (req, res) => {
