@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const pg = require("pg");
 const conexao = new Sequelize(process.env.DATABASE_URL, {
   host: "localhost",
   dialect: "postgres",
@@ -7,6 +8,7 @@ const conexao = new Sequelize(process.env.DATABASE_URL, {
     useUTC: false, // Evita usar UTC no PostgreSQL
     dateStrings: true, // Garante que os timestamps sejam tratados como strings, preservando o fuso horário
   },
+  dialectModule: pg,
 });
 
 try {
