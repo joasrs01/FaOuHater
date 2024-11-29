@@ -5,6 +5,7 @@ const app = express();
 const reviewsRouters = require("./routers/reviewsRouters");
 const usuariosRouters = require("./routers/usuariosRouters");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 //estabelece a pasta de partials ao handlebars
 const hbs = exphbr.create({
@@ -14,6 +15,7 @@ const hbs = exphbr.create({
 // view engine
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
+app.set("views", path.join(__dirname, "views"));
 
 // para utilizar cookies
 app.use(cookieParser());

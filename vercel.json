@@ -8,6 +8,5 @@
         "src": "(.*)",
         "dest": "app.js"
     }],
-    "installCommand": "npm install",
-    "includeFiles": ["views/**"]
+    "installCommand": "npm install"
 }
