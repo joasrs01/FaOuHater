@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 
 // qualquer endereço digitado ele cai nesse middleware mostrando a pagina 404, ** use
 app.use((req, res) => {
-  res.render("validacao/404");
+  res.render("/validacao/404");
 });
 
 // inicia o servidor
