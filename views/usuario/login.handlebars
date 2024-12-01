@@ -1,24 +1,32 @@
 
-<div class="container">
-<h1>Acesse sua conta!</h1>
-  <div class="container container-login">
-      <div class="card-login card-padrao">
-          <form id="form-login" action="/usuario/login" method="POST">
-              <div class="form-control-bsp">
-                {{!-- <label for="login">Acesse sua conta!</label> --}}
-                <input class="txt-padrao-bsp" type="text" name="login" placeholder="Usuário">
-              </div>
-              <div class="form-control-bsp">
-                  <input class="txt-padrao-bsp" type="password" name="senha" placeholder="Senha">
-                </div>
-              <input class="btn-login btn" type="submit" value="Login">
-              <div id="msg-login-invalido" {{#if esconderMsgInvalido}} hidden="true" {{/if}}>
-                <span style="color:#b62222;">Login ou senha incorretos!</span>
-              </div>
-              <div id="link-nova-conta">
-                  <a href="/usuario/add">ou crie uma conta clicado aqui!</a>
-              </div>
-            </form>
+<div class="container container-form">
+  <form class="card-padrao" action="/usuario/login" method="POST">            
+    <h1>Acesse sua conta</h1>
+    <div class="input-group has-validation" style="margin-bottom: 5px;" >
+      <div class="form-floating{{#if validacao.loginInvalido}} is-invalid{{/if}}">
+          <input type="text" class="form-control{{#if validacao.loginInvalido}} is-invalid{{/if}}" placeholder="Usuario" name="login" id="login-usuario" required  style="margin-bottom: 0px;">
+          <label>Usuário</label>
       </div>
+      {{#if validacao.loginInvalido}}
+        <span class="invalid-feedback">Login não é válido</span>
+      {{/if}}        
     </div>
+
+    <div class="div-senha" style="margin-bottom: 5px;" >
+      <div class="input-group has-validation">
+        <div class="form-floating{{#if validacao.senhaInvalida}} is-invalid{{/if}}">
+            <input data-campo-senha="1" type="password" class="form-control{{#if validacao.senhaInvalida}} is-invalid{{/if}}" placeholder="Senha" name="senha" id="login-senha" required  style="margin-bottom: 0px;">
+            <label>Senha</label>
+        </div>
+        {{#if validacao.senhaInvalida}}
+          <span class="invalid-feedback" style="margin-bottom: 10px;">Senha não é válida</span>
+        {{/if}}  
+      </div>
+      <button type="button" id="1" class="btn-olho-senha"><i class="bi bi-eye fs-2"></i></button>
+    </div>
+    <input class="btn btn-submit" type="submit" value="Login">
+    <div id="link-nova-conta">
+        <a href="/usuario/add">ou crie uma conta clicado aqui!</a>
+    </div>
+  </form>
 </div>

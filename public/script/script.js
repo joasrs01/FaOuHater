@@ -322,23 +322,33 @@ function onValidarFormUsuario(event) {
     const email = document.querySelector("#email");
     const login = document.querySelector("#login");
     const senha = document.querySelector("#senha");
+    const senhaConfirmacao = document.querySelector("#senha-confirmacao");
+
+    const divInputEmail = document.querySelector("#div-campo-email");
+    const divInputLogin = document.querySelector("#div-campo-login");
+    const divInputSenhaConfirmacao = document.querySelector(
+      "#div-campo-senha-confirmacao"
+    );
 
     const spanMsgEmail = document.querySelector("#msg-email");
     const spanMsgLogin = document.querySelector("#msg-login");
+    const spanMsgSenhaConfirmacao = document.querySelector(
+      "#msg-senha-confirmacao"
+    );
 
-    //remove invalidações se tiver
-    spanMsgEmail.innerHTML = "";
-    spanMsgLogin.innerHTML = "";
+    name.classList.remove("is-invalid");
+    email.classList.remove("is-invalid");
+    login.classList.remove("is-invalid");
+    senhaConfirmacao.classList.remove("is-invalid");
 
-    name.classList.remove("form-control-invalido");
-    email.classList.remove("form-control-invalido");
-    login.classList.remove("form-control-invalido");
-    senha.classList.remove("form-control-invalido");
+    divInputEmail.classList.remove("is-invalid");
+    divInputLogin.classList.remove("is-invalid");
+    divInputSenhaConfirmacao.classList.remove("is-invalid");
 
     // Nome
     if (name.value.trim() === "") {
       valid = false;
-      name.classList.add("form-control-invalido");
+      name.classList.add("is-invalid");
     }
 
     // Email
@@ -346,10 +356,11 @@ function onValidarFormUsuario(event) {
       /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
     if (email.value.trim() === "") {
       valid = false;
-      email.classList.add("form-control-invalido");
+      email.classList.add("is-invalid");
     } else if (!emailPattern.test(email.value.trim())) {
       valid = false;
-      email.classList.add("form-control-invalido");
+      divInputEmail.classList.add("is-invalid");
+      email.classList.add("is-invalid");
       spanMsgEmail.innerHTML = "O e-mail digitado não é valido.";
     }
 
@@ -357,18 +368,32 @@ function onValidarFormUsuario(event) {
     const loginPattern = /^[a-zA-Z0-9_.]+$/; // Alfanumérico e underline permitido
     if (login.value.trim() === "") {
       valid = false;
-      login.classList.add("form-control-invalido");
+      login.classList.add("is-invalid");
     } else if (!loginPattern.test(login.value.trim())) {
       valid = false;
-      email.classList.add("form-control-invalido");
+      login.classList.add("is-invalid");
+      divInputLogin.classList.add("is-invalid");
       spanMsgLogin.innerHTML =
         "O login não pode conter espaços ou caracteres especiais.";
+    }
+
+    if (senhaConfirmacao.value.trim() === "") {
+      valid = false;
+      senhaConfirmacao.classList.add("is-invalid");
     }
 
     // Nome
     if (senha.value.trim() === "") {
       valid = false;
-      senha.classList.add("form-control-invalido");
+      senha.classList.add("is-invalid");
+    } else if (
+      senhaConfirmacao.value.trim() !== "" &&
+      senhaConfirmacao.value !== senha.value
+    ) {
+      valid = false;
+      divInputSenhaConfirmacao.classList.add("is-invalid");
+      senhaConfirmacao.classList.add("is-invalid");
+      spanMsgSenhaConfirmacao.innerHTML = "As senhas não conferem";
     }
 
     if (!valid) {
@@ -378,3 +403,39 @@ function onValidarFormUsuario(event) {
     console.log("erro ao executar a validação do formulario: " + error);
   }
 }
+
+// evento tecla enter pro form de login
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    const iptLogin = document.querySelector("#login-usuario");
+    const iptSenha = document.querySelector("#login-senha");
+
+    if (
+      iptLogin &&
+      iptSenha &&
+      (document.activeElement === iptLogin ||
+        document.activeElement === iptSenha)
+    ) {
+      loginForm.submit();
+    }
+  }
+});
+
+document.querySelectorAll(".btn-olho-senha").forEach((e) => {
+  const txtSenha = document.querySelector(`[data-campo-senha="${e.id}"]`);
+
+  if (txtSenha) {
+    e.addEventListener("mousedown", () => mostrarSenha(true));
+
+    e.addEventListener("mouseup", () => mostrarSenha(false));
+  }
+
+  function mostrarSenha(mostrarSenha) {
+    txtSenha.type = mostrarSenha ? "text" : "password";
+    e.style.backgroundColor = mostrarSenha ? "#d5d5d5" : "#f0f0f0";
+
+    const iconeOlho = e.children[0];
+    iconeOlho.classList.remove(mostrarSenha ? "bi-eye" : "bi-eye-fill");
+    iconeOlho.classList.add(mostrarSenha ? "bi-eye-fill" : "bi-eye");
+  }
+});

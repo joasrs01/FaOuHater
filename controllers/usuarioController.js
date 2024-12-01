@@ -6,7 +6,7 @@ const { Sequelize } = require("sequelize");
 
 module.exports = class UsuarioController {
   static abrirCadastroUsuario(req, res) {
-    res.render("usuario/cadastrarUsuario");
+    res.render("usuario/cadastrarUsuario", { esconderCadastro: true });
   }
 
   static async cadastrarUsuario(req, res) {
@@ -60,13 +60,14 @@ module.exports = class UsuarioController {
   }
 
   static abrirLogin(req, res) {
-    res.render("usuario/login", { esconderMsgInvalido: true });
+    res.render("usuario/login", { esconderLogin: true });
   }
 
   static async autenticarUsuario(req, res) {
     const login = req.body.login;
     const senha = req.body.senha;
-    let valido = false;
+
+    let validacao = { loginInvalido: false, senhaInvalida: false };
 
     const usuario = await Usuario.findOne({
       raw: true,
@@ -75,12 +76,18 @@ module.exports = class UsuarioController {
       },
     });
 
-    if (usuario && (await bcrypt.compare(senha, usuario.senha))) {
+    validacao.loginInvalido = usuario ? false : true;
+    validacao.senhaInvalida =
+      validacao.loginInvalido || !(await bcrypt.compare(senha, usuario.senha));
+
+    console.log(validacao);
+
+    if (!validacao.loginInvalido && !validacao.senhaInvalida) {
       gerarCookieToken(res, usuario);
 
       res.redirect("/");
     } else {
-      res.render("usuario/login", { esconderMsgInvalido: false });
+      res.render("usuario/login", { validacao });
     }
   }
 
