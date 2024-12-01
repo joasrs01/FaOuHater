@@ -18,6 +18,11 @@ module.exports = class UsuarioController {
     const login = req.body.login;
     const senha = req.body.senha;
 
+    const validacao = {
+      validacaoEmail: undefined,
+      validacaoUsuario: undefined,
+    };
+
     if (
       (await Usuario.count({
         where: {
@@ -25,7 +30,7 @@ module.exports = class UsuarioController {
         },
       })) > 0
     ) {
-      msgEmail = "E-mail já está sendo utilizado.";
+      validacao.validacaoEmail = "E-mail já está sendo utilizado.";
     }
 
     if (
@@ -35,11 +40,11 @@ module.exports = class UsuarioController {
         },
       })) > 0
     ) {
-      msgLogin = "User já está sendo utilizado.";
+      validacao.validacaoUsuario = "Usuário já está sendo utilizado.";
     }
 
-    if (msgEmail || msgLogin) {
-      res.render("usuario/cadastrarUsuario", { msgEmail, msgLogin });
+    if (validacao.validacaoEmail || validacao.validacaoUsuario) {
+      res.render("usuario/cadastrarUsuario", { validacao });
     } else {
       //gera a senha criptografada
       const senhaHash = bcrypt.hashSync(senha, 10);

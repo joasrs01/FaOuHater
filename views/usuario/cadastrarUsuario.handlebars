@@ -12,19 +12,19 @@
         </div>
         
         <div class="input-group has-validation">
-            <div class="form-floating" id="div-campo-email">
-                <input type="text" class="ipt-cadastro-usuario form-control" placeholder="Username" id="email" name="email">
+            <div class="form-floating {{#if validacao.validacaoEmail}} is-invalid{{/if}}" id="div-campo-email">
+                <input type="text" class="ipt-cadastro-usuario form-control {{#if validacao.validacaoEmail}} is-invalid{{/if}}" placeholder="Username" id="email" name="email">
                 <label>E-mail</label>
             </div>
-            <span class="invalid-feedback" id="msg-email"></span>
+            {{#if validacao.validacaoEmail}}<span class="invalid-feedback" id="msg-email">{{validacao.validacaoEmail}}</span>{{/if}}           
         </div>
 
         <div class="input-group has-validation">
-            <div class="form-floating" id="div-campo-login">
-                <input type="text" class="ipt-cadastro-usuario form-control" placeholder="Username" id="login" name="login">
+            <div class="form-floating{{#if validacao.validacaoUsuario}} is-invalid{{/if}}" id="div-campo-login">
+                <input type="text" class="ipt-cadastro-usuario form-control{{#if validacao.validacaoUsuario}} is-invalid{{/if}}" placeholder="Username" id="login" name="login">
                 <label>Usuário</label>
             </div>
-            <span class="invalid-feedback"  id="msg-login"></span>
+            {{#if validacao.validacaoUsuario}}<span class="invalid-feedback" id="msg-email">{{validacao.validacaoUsuario}}</span>{{/if}}
         </div>
 
         {{!-- <div class="input-group has-validation" style="margin-bottom: 5px;">
