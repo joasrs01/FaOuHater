@@ -406,7 +406,11 @@ form input[type='submit'] {
   background-color: #eaeaea;
 }
 
-#login-senha{
-  border-right: none;
-  border-radius: 7px 0px 0px 7px;
+.txt-senha-borda{
+  border-right: none !important;
+  border-radius: 7px 0px 0px 7px !important;
+}
+
+.btn-olho-senha-invalido{
+  border-color: #dc3545;
 }

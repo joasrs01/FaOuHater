@@ -16,7 +16,7 @@
                 <input type="text" class="ipt-cadastro-usuario form-control {{#if validacao.validacaoEmail}} is-invalid{{/if}}" placeholder="Username" id="email" name="email">
                 <label>E-mail</label>
             </div>
-            {{#if validacao.validacaoEmail}}<span class="invalid-feedback" id="msg-email">{{validacao.validacaoEmail}}</span>{{/if}}           
+            <span class="invalid-feedback" id="msg-email">{{#if validacao.validacaoEmail}}{{validacao.validacaoEmail}}{{/if}}</span>         
         </div>
 
         <div class="input-group has-validation">
@@ -24,7 +24,7 @@
                 <input type="text" class="ipt-cadastro-usuario form-control{{#if validacao.validacaoUsuario}} is-invalid{{/if}}" placeholder="Username" id="login" name="login">
                 <label>Usuário</label>
             </div>
-            {{#if validacao.validacaoUsuario}}<span class="invalid-feedback" id="msg-email">{{validacao.validacaoUsuario}}</span>{{/if}}
+            <span class="invalid-feedback" id="msg-login">{{#if validacao.validacaoUsuario}}{{validacao.validacaoUsuario}}{{/if}}</span>
         </div>
 
         {{!-- <div class="input-group has-validation" style="margin-bottom: 5px;">
@@ -46,12 +46,12 @@
         <div class="div-senha" style="margin-bottom: 5px;" >
            <div class="input-group has-validation">
                 <div class="form-floating" id="div-campo-senha">
-                    <input data-campo-senha="1" style="margin-bottom: 0px;" type="password" class="ipt-cadastro-usuario form-control" placeholder="Senha" id="senha" name="senha">
+                    <input data-campo-senha="1" style="margin-bottom: 0px;" type="password" class="txt-senha-borda ipt-cadastro-usuario form-control" placeholder="Senha" id="senha" name="senha">
                     <label>Senha</label>
                 </div>
                 <span class="invalid-feedback" id="msg-senha"></span>
             </div>
-            <button type="button" id="1" class="btn-olho-senha"><i class="bi bi-eye fs-2"></i></button>
+            <button data-id="btn-visualizar-senha" type="button" id="1" class="btn-olho-senha"><i class="bi bi-eye fs-2"></i></button>
         </div>
 
         <div class="input-group has-validation" style="margin-bottom: 5px;">

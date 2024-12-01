@@ -339,6 +339,7 @@ function onValidarFormUsuario(event) {
     name.classList.remove("is-invalid");
     email.classList.remove("is-invalid");
     login.classList.remove("is-invalid");
+    senha.classList.remove("is-invalid");
     senhaConfirmacao.classList.remove("is-invalid");
 
     divInputEmail.classList.remove("is-invalid");
@@ -382,10 +383,17 @@ function onValidarFormUsuario(event) {
       senhaConfirmacao.classList.add("is-invalid");
     }
 
+    const btnOlhoSenha = document.querySelector(
+      '[data-id="btn-visualizar-senha"]'
+    );
+
+    btnOlhoSenha.classList.remove("btn-olho-senha-invalido");
+
     // Nome
     if (senha.value.trim() === "") {
       valid = false;
       senha.classList.add("is-invalid");
+      btnOlhoSenha.classList.add("btn-olho-senha-invalido");
     } else if (
       senhaConfirmacao.value.trim() !== "" &&
       senhaConfirmacao.value !== senha.value
@@ -400,6 +408,7 @@ function onValidarFormUsuario(event) {
       event.preventDefault();
     }
   } catch (error) {
+    event.preventDefault();
     console.log("erro ao executar a validação do formulario: " + error);
   }
 }

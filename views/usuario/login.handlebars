@@ -15,14 +15,14 @@
     <div class="div-senha" style="margin-bottom: 5px;" >
       <div class="input-group has-validation">
         <div class="form-floating{{#if validacao.senhaInvalida}} is-invalid{{/if}}">
-            <input data-campo-senha="1" type="password" class="form-control{{#if validacao.senhaInvalida}} is-invalid{{/if}}" placeholder="Senha" name="senha" id="login-senha" required  style="margin-bottom: 0px;">
+            <input data-campo-senha="1" type="password" class="txt-senha-borda form-control{{#if validacao.senhaInvalida}} is-invalid{{/if}}" placeholder="Senha" name="senha" id="login-senha" required  style="margin-bottom: 0px;">
             <label>Senha</label>
         </div>
+        <button type="button" id="1" class="btn-olho-senha {{#if validacao.senhaInvalida}} btn-olho-senha-invalido{{/if}}"><i class="bi bi-eye fs-2"></i></button>
         {{#if validacao.senhaInvalida}}
           <span class="invalid-feedback" style="margin-bottom: 10px;">Senha não é válida</span>
         {{/if}}  
       </div>
-      <button type="button" id="1" class="btn-olho-senha"><i class="bi bi-eye fs-2"></i></button>
     </div>
     <input class="btn btn-submit" type="submit" value="Login">
     <div id="link-nova-conta">
