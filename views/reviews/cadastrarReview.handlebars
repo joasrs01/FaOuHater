@@ -4,19 +4,28 @@
         <h1>Cadastro de Review</h1>
         <form id="form-review" action="/reviews/add" method="post">
             <input type="hidden" name="usuario" value={{usuarioAutenticado.userId}}>
-            <div class="form-control-bsp">
-                <span class="texto-padrao" for="musica">Música:</span>
-                <input class="txt-padrao-bsp" type="text" id="musica" name="musica" placeholder="Nome da música...">
+
+            <div class="input-group">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Música" id="musica" name="musica" required>
+                    <label>Música</label>
+                </div>      
             </div>
-            <div class="form-control-bsp">
-                <span class="texto-padrao" for="artista">Artista:</span>
-                <input class="txt-padrao-bsp" type="text" id="artista" name="artista" placeholder="Nome da banda ou artista...">
+
+            <div class="input-group">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Artista" id="artista" name="artista" required>
+                    <label>Artista</label>
+                </div>      
             </div>
-            <div class="form-control-bsp">
-                <span class="texto-padrao" for="titulo">Review:</span>
-                <textarea class="txt-padrao-bsp" id="txt-area-review" type="text" name="review" placeholder="Escreva aqui o seu review sobre a música"></textarea>
+
+            <div class="input-group">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Review" id="txt-area-review" name="review" required></textarea>
+                    <label>Review</label>
+                </div>      
             </div>
-            <input class="btn" type="submit" value="Cadastrar">
+            <input class="btn" type="submit" value="Enviar review">
         </form>
     </div>
 </div>

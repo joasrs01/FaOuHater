@@ -23,6 +23,7 @@ h1 {
   align-items: center;
   background-color: #1C2840;
   color: #BEBEBE;
+  height: 100px;
 }
 
 #navbar ul {
@@ -197,7 +198,7 @@ form input[type='submit'] {
 .span-data-review{
   font-size: smaller;
   /* color: #BEBEBE; */
-  color: grey;
+  color: #5e5e5e;
 }
 
 #form-login {
@@ -413,4 +414,25 @@ form input[type='submit'] {
 
 .btn-olho-senha-invalido{
   border-color: #dc3545;
+}
+
+#nome-usuario-navbar{
+  margin-right: 15px;
+}
+
+#nome-usuario-navbar:hover{
+  color: #e3e3e3;
+}
+
+.div-info-usuario{
+  display: grid;
+}
+
+.nome-usuario{
+  font-size: medium;
+  font-weight: bolder;
+}
+
+.login-usuario:hover, .nome-usuario:hover{
+  color: #464646;
 }

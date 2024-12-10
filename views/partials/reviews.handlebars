@@ -3,7 +3,10 @@
     <div class="card-review card-padrao card-content">
         <div class="titulo">
             <div class="info-review">
-                <a class="span-data-review" style="text-decoration: none;" href="../../usuario/perfil/{{this.idUsuario}}" >fh/ {{this.nomeUsuario}}</a>
+                <div class="div-info-usuario">
+                    <a class="span-data-review nome-usuario" style="text-decoration: none;" href="/usuario/perfil/{{this.idUsuario}}" >{{this.nomeUsuario}}</a>
+                    <a class="span-data-review login-usuario" style="text-decoration: none;" href="/usuario/perfil/{{this.idUsuario}}" >@{{this.loginUsuario}}</a>
+                </div>
                 <span class="span-data-review">{{this.modDataAtualizacao}}</span>
             </div>
             <div class="t-musica-artista">

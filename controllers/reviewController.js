@@ -139,7 +139,8 @@ function prepararReviews(reviews, usuarioId) {
     let segundos = String(e.updatedAt.getSeconds()).padStart(2, "0");
 
     e.modDataAtualizacao = `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
-    e.nomeUsuario = e["Usuario.login"];
+    e.nomeUsuario = e["Usuario.nome"];
+    e.loginUsuario = e["Usuario.login"];
     e.idUsuario = e["Usuario.id"];
     e.apresentarOpcoes =
       usuarioId === e.idUsuario ? true : usuarioId === 1 ? true : false;
