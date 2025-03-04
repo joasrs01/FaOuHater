@@ -53,8 +53,10 @@ h1 {
 }
 
 .perfil-usuario {
-  width: 40%;
+  width: 80%;
+  height: 100%;
   margin-right: 10px;
+  display: flex;
 }
 
 .perfil-nome {
@@ -424,8 +426,13 @@ form input[type='submit'] {
   color: #e3e3e3;
 }
 
-.div-info-usuario{
+#div-info {
   display: grid;
+  margin-left: 10px;
+}
+
+.div-info-usuario{
+  display: flex;
 }
 
 .nome-usuario{
@@ -435,4 +442,47 @@ form input[type='submit'] {
 
 .login-usuario:hover, .nome-usuario:hover{
   color: #464646;
+}
+
+#img-usuario-card{
+  width: 40px;
+  border: 2px solid #10151E;
+}
+
+#img-usuario-navbar{
+  width: 55px;
+}
+
+#img-usuario{
+  width: 200px;
+}
+
+#div-imagem-usuario{
+  margin-right: 30px;
+}
+
+#img-usuario-alteracao{
+  width: 70%;
+  /* transition: opacity 0.3s ease; */
+}
+
+/* #img-usuario-alteracao:hover{
+  opacity: 0.8;
+} */
+
+img{
+  border-radius: 100%;
+  border: 3px solid #10151E !important;
+}
+
+#div-imagem-usuario-alteracao{
+  text-align: center;
+  margin: 15px 0px 15px 0px;
+}
+
+#btn-selecionar-arquivo{
+  /* width: 100%; */
+  margin-top: 20px;
+  background-color: grey;
+  color: #f1f1f1
 }

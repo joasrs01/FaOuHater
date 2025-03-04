@@ -18,6 +18,7 @@
             {{!-- <li><a  class="btn btn-outline-primary" href="/reviews/add">Cadastrar Review</a></li> --}}
             <div id="nav-cont-direita">
                 {{#if usuarioAutenticado}}
+                    <li><a href="/usuario/perfil"><img id="img-usuario-navbar" src="{{usuarioAutenticado.userIcone}}" alt="icone-user"></a></li>
                     <li><a id="nome-usuario-navbar" href="/usuario/perfil">{{usuarioAutenticado.userName}}</a></li>
                     <li><a class="btn btn-outline-primary btn-navbar" href="/reviews/add">Cadastrar Review</a></li>
                     <li><a class="btn btn-outline-primary btn-navbar" href="/usuario/logoff">Logoff</a></li>

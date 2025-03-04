@@ -1,6 +1,6 @@
 const express = require("express");
 const exphbr = require("express-handlebars");
-const porta = process.env.PORT || 3000;
+const porta = process.env.PORT || 3002;
 const app = express();
 const reviewsRouters = require("./routers/reviewsRouters");
 const usuariosRouters = require("./routers/usuariosRouters");
@@ -10,6 +10,15 @@ const path = require("path");
 //estabelece a pasta de partials ao handlebars
 const hbs = exphbr.create({
   partialsDir: ["views/partials"],
+  helpers: {
+    igual: (a, b) => a === b,
+    maiorq: (a, b) => a < b,
+    menorq: (a, b) => a > b,
+    maiorIgual: (a, b) => a >= b,
+    menorIgual: (a, b) => a <= b,
+    and: (a, b) => a && b,
+    or: (a, b) => a || b,
+  },
 });
 
 // view engine

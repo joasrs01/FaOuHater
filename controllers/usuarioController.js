@@ -5,6 +5,43 @@ const reviewController = require("./reviewController");
 const { Sequelize } = require("sequelize");
 
 module.exports = class UsuarioController {
+  static async registrarAlteracao(req, res) {
+    if (req.file) {
+      const fs = require("fs");
+      const axios = require("axios");
+      const FormData = require("form-data");
+      const streamImagem = fs.createReadStream(req.file.path);
+
+      const form = new FormData();
+      form.append("key", "0979c634786da63602e9149f8be8e0dc");
+      form.append("image", streamImagem);
+
+      const headers = form.getHeaders();
+
+      const resposta = await axios.post(
+        "https://api.imgbb.com/1/upload",
+        form,
+        {
+          headers: {
+            headers,
+          },
+        }
+      );
+
+      Usuario.update(
+        { urlImagemPerfil: resposta.data.data.display_url },
+        { where: { id: req.usuario.userId } }
+      );
+
+      streamImagem.destroy();
+      fs.unlinkSync(req.file.path);
+    }
+
+    res.redirect("perfil");
+  }
+
+  static uploadImagem(req, res) {}
+
   static abrirCadastroUsuario(req, res) {
     res.render("usuario/cadastrarUsuario", { esconderCadastro: true });
   }
@@ -47,7 +84,8 @@ module.exports = class UsuarioController {
       res.render("usuario/cadastrarUsuario", { validacao });
     } else {
       //gera a senha criptografada
-      const senhaHash = bcrypt.hashSync(senha, 10);
+      const salt = bcrypt.genSaltSync();
+      const senhaHash = bcrypt.hashSync(senha, salt);
 
       let usuario = {
         nome: nome,
@@ -85,8 +123,6 @@ module.exports = class UsuarioController {
     validacao.senhaInvalida =
       validacao.loginInvalido || !(await bcrypt.compare(senha, usuario.senha));
 
-    console.log(validacao);
-
     if (!validacao.loginInvalido && !validacao.senhaInvalida) {
       gerarCookieToken(res, usuario);
 
@@ -101,8 +137,23 @@ module.exports = class UsuarioController {
     res.redirect("/");
   }
 
+  static async abrirAlteracaoCadastro(req, res) {
+    const usuario = await Usuario.findOne({
+      raw: true,
+      where: { id: req.usuario.userId },
+    });
+
+    usuario.urlImagemPerfil = usuario.urlImagemPerfil
+      ? usuario.urlImagemPerfil
+      : "https://i.ibb.co/yqMZctK/noprofileimage.jpg";
+
+    res.render("usuario/alterarPerfil", {
+      usuarioAutenticado: req.usuario,
+      usuario,
+    });
+  }
+
   static async perfilUsuario(req, res) {
-    console.log(req.params.id);
     //console.log(req.params.id ?? req.usuario ? req.usuario.userId : 0);
 
     let idUsuario = req.params.id;
@@ -133,6 +184,10 @@ module.exports = class UsuarioController {
       });
 
       if (perfil) {
+        perfil.urlImagemPerfil = perfil.urlImagemPerfil
+          ? perfil.urlImagemPerfil
+          : "https://i.ibb.co/yqMZctK/noprofileimage.jpg";
+
         res.render("usuario/perfilUsuario", {
           usuarioAutenticado: req.usuario,
           reviews,
@@ -146,6 +201,10 @@ module.exports = class UsuarioController {
 };
 
 function gerarCookieToken(res, usuario) {
+  usuario.urlImagemPerfil = usuario.urlImagemPerfil
+    ? usuario.urlImagemPerfil
+    : "https://i.ibb.co/yqMZctK/noprofileimage.jpg";
+
   const token = gerarTokenAutenticado(usuario);
 
   res.cookie("token_usuario_foh", token, {
@@ -159,5 +218,6 @@ function gerarTokenAutenticado(usuario) {
   return tokenService.assinarToken({
     userId: usuario.id,
     userName: usuario.nome,
+    userIcone: usuario.urlImagemPerfil,
   });
 }

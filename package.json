@@ -4,19 +4,22 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node app.js"
+    "start": "nodemon app.js 3000"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "express-handlebars": "^8.0.1",
+    "form-data": "^4.0.1",
     "inquirer": "^10.1.8",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.12.0",
     "sequelize": "^6.37.3"
   },
@@ -24,6 +27,6 @@
     "nodemon": "^3.1.4"
   },
   "engines": {
-  "node": "18.x"
-}
+    "node": "18.x"
+  }
 }

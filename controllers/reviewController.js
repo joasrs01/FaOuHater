@@ -11,6 +11,8 @@ module.exports = class ReviewController {
   }
 
   static async exibirHome(req, res) {
+    //res.json(await buscarTodasReviews(req.usuario ? req.usuario.userId : 0));
+
     res.render("reviews/home", {
       usuarioAutenticado: req.usuario,
       reviews: await buscarTodasReviews(req.usuario ? req.usuario.userId : 0),
@@ -68,7 +70,7 @@ async function buscarTodasReviews(usuarioId) {
     include: [
       {
         model: Usuario,
-        attributes: ["nome", "login", "id"],
+        attributes: ["nome", "login", "id", "urlImagemPerfil"],
       },
       {
         model: Reacoes,
@@ -142,6 +144,9 @@ function prepararReviews(reviews, usuarioId) {
     e.nomeUsuario = e["Usuario.nome"];
     e.loginUsuario = e["Usuario.login"];
     e.idUsuario = e["Usuario.id"];
+    e.icone = e["Usuario.urlImagemPerfil"]
+      ? e["Usuario.urlImagemPerfil"]
+      : "https://i.ibb.co/yqMZctK/noprofileimage.jpg";
     e.apresentarOpcoes =
       usuarioId === e.idUsuario ? true : usuarioId === 1 ? true : false;
   });
@@ -155,7 +160,7 @@ async function buscarReviewsDoUsuario(usuarioId, idUsuarioAutenticado) {
     include: [
       {
         model: Usuario,
-        attributes: ["nome", "login", "id"],
+        attributes: ["nome", "login", "id", "urlImagemPerfil"],
       },
       {
         model: Reacoes,

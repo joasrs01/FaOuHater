@@ -20,6 +20,10 @@ const Usuario = conexao.define("Usuario", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  urlImagemPerfil: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 });
 
 Usuario.sync()

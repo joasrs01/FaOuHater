@@ -448,3 +448,52 @@ document.querySelectorAll(".btn-olho-senha").forEach((e) => {
     iconeOlho.classList.add(mostrarSenha ? "bi-eye-fill" : "bi-eye");
   }
 });
+
+const inputImagem = document.querySelector("#arquivo-imagem");
+if (inputImagem) {
+  inputImagem.addEventListener("change", () => {
+    const img = document.querySelector("#img-usuario-alteracao");
+    const imagemSelecionada = inputImagem.files[0];
+    console.log(imagemSelecionada);
+
+    if (!imagemSelecionada) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const imagemBase64 = event.target.result;
+      //localStorage.setItem("tmp_imagens_fh", imagemBase64);
+
+      img.src = imagemBase64;
+    };
+    reader.readAsDataURL(imagemSelecionada);
+  });
+}
+// const form = document.querySelector("#form-alteracao-usuario");
+
+// form.addEventListener("submit", async (e) => {
+//   e.preventDefault();
+
+//   const formData = new FormData();
+//   const arquivo = document.getElementById("arquivo-imagem");
+
+//   if (arquivo.files[0]) {
+//     formData.append("image", arquivo.files[0]); // Adiciona a imagem ao FormData
+
+//     try {
+//       const response = await fetch("usuario/imagem/upload", {
+//         method: "POST",
+//         body: formData, // Envia o FormData para o servidor
+//       });
+
+//       const result = await response.json();
+//       if (response.ok) {
+//         responseMessage.textContent = `Imagem enviada com sucesso: ${result.imageUrl}`;
+//       } else {
+//         responseMessage.textContent = `Erro: ${result.message}`;
+//       }
+//     } catch (error) {
+//       responseMessage.textContent = "Erro ao enviar a imagem.";
+//       console.error("Erro:", error);
+//     }
+//   }
+// });

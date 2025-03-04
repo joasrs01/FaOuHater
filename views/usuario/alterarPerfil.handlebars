@@ -1,0 +1,58 @@
+
+<div class="container container-form">
+    <form action="/usuario/alterar" method="post" class="card-padrao" id="form-alteracao-usuario" enctype="multipart/form-data">
+        <h1>Editar Perfil</h1>       
+        <input type="hidden" name="usario-id" value="{{usuario.id}}">
+        <div id="div-imagem-usuario-alteracao">
+            <img id="img-usuario-alteracao" src="{{usuario.urlImagemPerfil}}" alt="imagem-usuario">
+            <label id="btn-selecionar-arquivo" class="btn" for="arquivo-imagem">Selecionar imagem</label>
+            <input type="file" name="image" id="arquivo-imagem"  hidden name="arquivo-imagem">
+        </div>
+        <div id="div-info-usuario-alteracao">
+            <div class="input-group has-validation">
+                <div class="form-floating" id="div-campo-nome">
+                    <input type="text" class="ipt-cadastro-usuario form-control" placeholder="Username" id="nome" name="nome" value="{{usuario.nome}}">
+                    <label>Nome</label>
+                </div>
+                <span class="invalid-feedback" id="msg-nome"></span>
+            </div>
+
+            <div class="input-group has-validation">
+                <div class="form-floating{{#if validacao.validacaoUsuario}} is-invalid{{/if}}" id="div-campo-login">
+                    <input type="text" class="ipt-cadastro-usuario form-control{{#if validacao.validacaoUsuario}} is-invalid{{/if}}" placeholder="Username" id="login" name="login" value="{{usuario.login}}">
+                    <label>Usuário</label>
+                </div>
+                <span class="invalid-feedback" id="msg-login">{{#if validacao.validacaoUsuario}}{{validacao.validacaoUsuario}}{{/if}}</span>
+            </div>  
+        </div>
+
+        <input class="btn btn-submit" type="submit" value="Alterar perfil">
+    </form>
+    {{!-- <form id="form-usuario" class="card-padrao" action="/usuario/alterar" method="post">    
+        <h1>Editar Perfil</h1>       
+        <input type="hidden" name="usario-id" value="{{usuario.id}}">
+        <div id="div-imagem-usuario-alteracao">
+            <img id="img-usuario-alteracao" src="https://i.ibb.co/yqMZctK/noprofileimage.jpg" alt="imagem-usuario">
+            <label id="btn-selecionar-arquivo" class="btn" for="arquivo-imagem">Selecionar imagem</label>
+            <input type="file" name="arquivo-imagem" id="arquivo-imagem"  hidden name="arquivo-imagem">
+        </div>
+        <div id="div-info-usuario-alteracao">
+            <div class="input-group has-validation">
+                <div class="form-floating" id="div-campo-nome">
+                    <input type="text" class="ipt-cadastro-usuario form-control" placeholder="Username" id="nome" name="nome" value="{{usuario.nome}}">
+                    <label>Nome</label>
+                </div>
+                <span class="invalid-feedback" id="msg-nome"></span>
+            </div>
+
+            <div class="input-group has-validation">
+                <div class="form-floating{{#if validacao.validacaoUsuario}} is-invalid{{/if}}" id="div-campo-login">
+                    <input type="text" class="ipt-cadastro-usuario form-control{{#if validacao.validacaoUsuario}} is-invalid{{/if}}" placeholder="Username" id="login" name="login" value="{{usuario.login}}">
+                    <label>Usuário</label>
+                </div>
+                <span class="invalid-feedback" id="msg-login">{{#if validacao.validacaoUsuario}}{{validacao.validacaoUsuario}}{{/if}}</span>
+            </div>  
+        </div>
+        <input class="btn btn-submit" type="submit" value="Alterar perfil">
+    </form> --}}
+</div>

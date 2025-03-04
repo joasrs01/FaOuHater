@@ -1,12 +1,18 @@
 <div class="container-perfil">
-    <div class="perfil-usuario">
-    <div class="card-padrao " style="padding: 25px;">
-        <h2 class="perfil-nome texto-padrao">{{perfil.nome}}</h2>
-        <h5 class="perfil-login texto-padrao">{{perfil.login}}</h5>
-        <div class="perfil-info">
-            <span class="texto-padrao" >Reviews: {{perfil.qtdreviews}}</span>
+    <div class="perfil-usuario card-padrao">
+        <div id="div-imagem-usuario">
+            <img id="img-usuario" src="{{perfil.urlImagemPerfil}}" alt="imagem-usuario">
         </div>
-    </div>
+        <div id="div-info-usuario">
+            <h2 class="perfil-nome texto-padrao">{{perfil.nome}}</h2>
+            <h5 class="perfil-login texto-padrao">@{{perfil.login}}</h5>
+            <div class="perfil-info">
+                <span class="texto-padrao" >Reviews: {{perfil.qtdreviews}}</span>
+                {{#if ( and usuarioAutenticado (igual usuarioAutenticado.userId perfil.id) )}}
+                    <a class="btn" style="text-decoration: none; color: #e4e4e4; background-color: grey" href="/usuario/alterar">Editar perfil</a>
+                {{/if}}
+            </div>
+        </div>
     </div>
     <div class="reviews-usuario">
         {{>reviews}}

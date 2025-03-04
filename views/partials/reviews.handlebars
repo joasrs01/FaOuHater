@@ -4,8 +4,13 @@
         <div class="titulo">
             <div class="info-review">
                 <div class="div-info-usuario">
-                    <a class="span-data-review nome-usuario" style="text-decoration: none;" href="/usuario/perfil/{{this.idUsuario}}" >{{this.nomeUsuario}}</a>
-                    <a class="span-data-review login-usuario" style="text-decoration: none;" href="/usuario/perfil/{{this.idUsuario}}" >@{{this.loginUsuario}}</a>
+                    <div id="div-img-usuario-card">
+                        <a class="span-data-review" style="text-decoration: none;" href="/usuario/perfil/{{this.idUsuario}}" ><img id="img-usuario-card" src="{{this.icone}}" alt="icone-user"></a>
+                    </div>
+                    <div id="div-info">
+                        <a class="span-data-review nome-usuario" style="text-decoration: none;" href="/usuario/perfil/{{this.idUsuario}}" >{{this.nomeUsuario}}</a>
+                        <a class="span-data-review login-usuario" style="text-decoration: none;" href="/usuario/perfil/{{this.idUsuario}}" >@{{this.loginUsuario}}</a>
+                    </div>
                 </div>
                 <span class="span-data-review">{{this.modDataAtualizacao}}</span>
             </div>
