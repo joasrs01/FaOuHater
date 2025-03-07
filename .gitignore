@@ -26,7 +26,7 @@ logs/*
 tmp/
 temp/
 *.tmp
-*.temp
+# *.temp
 
 # Build e Output
 dist/
